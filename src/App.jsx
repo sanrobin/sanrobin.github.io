@@ -2,8 +2,9 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import LiquidEther from './components/LiquidEther/LiquidEther';
 import SpotlightCard from './components/SpotlightCard/SpotlightCard';
 import ClickSpark from './components/ClickSpark/ClickSpark';
+import Dock from './components/Dock/Dock';
+import { VscHome, VscCode, VscBriefcase, VscBook, VscSymbolMethod } from 'react-icons/vsc';
 import './App.css';
-
 /* ── Data ──────────────────────────────────────────── */
 
 const skills = [
@@ -159,12 +160,12 @@ const interests = [
   },
 ];
 
-const navItems = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Certs', href: '#certifications' },
+const dockItems = [
+  { icon: <VscHome size={18} />, label: 'Home', onClick: () => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <VscCode size={18} />, label: 'Skills', onClick: () => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <VscBriefcase size={18} />, label: 'Experience', onClick: () => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <VscSymbolMethod size={18} />, label: 'Projects', onClick: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <VscBook size={18} />, label: 'Certs', onClick: () => document.getElementById('certifications')?.scrollIntoView({ behavior: 'smooth' }) },
 ];
 
 /* ── Scroll animation hook ──────────────────────── */
@@ -235,26 +236,13 @@ export default function App() {
         />
       </div>
 
-      {/* Navigation */}
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} id="navbar">
-        <div className="nav-logo">
-          <span className="gradient-text">SM</span>
-        </div>
-        <button className="nav-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a href={item.href} onClick={handleNavClick}>
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      {/* Navigation Dock */}
+      <Dock 
+        items={dockItems}
+        panelHeight={68}
+        baseItemSize={50}
+        magnification={70}
+      />
 
       {/* Hero */}
       <section className="hero" id="hero">
