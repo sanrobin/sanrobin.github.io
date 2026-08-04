@@ -229,8 +229,8 @@ export default function App() {
           resolution={0.5}
           isBounce
           autoDemo={true}
-          autoSpeed={0.5}
-          autoIntensity={2.2}
+          autoSpeed={0.3}
+          autoIntensity={0.8}
           takeoverDuration={0.25}
           autoResumeDelay={3000}
           autoRampDuration={0.6}
@@ -275,17 +275,16 @@ export default function App() {
         </div>
       </section>
 
-      {/* About */}
       <AnimatedSection id="about">
-        <div className="section-header">
-          <span className="section-label">// About Me</span>
-          <h2 className="section-title">
-            Hey, I&apos;m <span className="gradient-text">Sanjay</span> 👋
-          </h2>
-        </div>
-        <div className="about-grid">
-          <div className="about-left">
+        <div className="about-container">
+          <div className="about-top">
             <div className="about-text">
+              <div className="section-header">
+                <span className="section-label">// About Me</span>
+                <h2 className="section-title">
+                  Hey, I&apos;m <span className="gradient-text">Sanjay</span> 👋
+                </h2>
+              </div>
               <p>
                 Based in Tamil Nadu, India, I am an ambitious Computer Science undergraduate at Anna University
                 Regional Campus Madurai. My work spans the complete software development spectrum—from low-level
@@ -299,56 +298,56 @@ export default function App() {
                 solutions.
               </p>
             </div>
-            <div className="about-highlights">
-              <SpotlightCard spotlightColor="rgba(82, 39, 255, 0.15)">
-                <div className="highlight-item">
-                  <div className="highlight-icon">🎓</div>
-                  <div>
-                    <div className="highlight-label">Education</div>
-                    <div className="highlight-value">
-                      B.E. in CSE, Anna University Regional Campus Madurai (2023 – Present)
-                    </div>
-                  </div>
-                </div>
-              </SpotlightCard>
-              <SpotlightCard spotlightColor="rgba(255, 159, 252, 0.15)">
-                <div className="highlight-item">
-                  <div className="highlight-icon">🎯</div>
-                  <div>
-                    <div className="highlight-label">Current Focus</div>
-                    <div className="highlight-value">
-                      Leading AWS cloud workshops & engineering real-time IoT vehicle tracking
-                    </div>
-                  </div>
-                </div>
-              </SpotlightCard>
-              <SpotlightCard spotlightColor="rgba(180, 151, 207, 0.15)">
-                <div className="highlight-item">
-                  <div className="highlight-icon">🌐</div>
-                  <div>
-                    <div className="highlight-label">Languages</div>
-                    <div className="highlight-value">
-                      English (IELTS 7.5) · Tamil (Native) · Japanese & French (Basic)
-                    </div>
-                  </div>
-                </div>
-              </SpotlightCard>
+            <div className="about-profile">
+              <ProfileCard
+                name="Sanjay M"
+                title="Tech Enthusiast and Student"
+                handle="sanrobin"
+                status="Online"
+                contactText="Contact Me"
+                avatarUrl="/itz_me.png"
+                showUserInfo={true}
+                enableTilt={true}
+                enableMobileTilt={false}
+                onContactClick={() => window.location.href = 'mailto:san_robin@outlook.com'}
+                behindGlowEnabled
+              />
             </div>
           </div>
-          <div className="about-right">
-            <ProfileCard
-              name="Sanjay M"
-              title="Tech Enthusiast and Student"
-              handle="sanrobin"
-              status="Online"
-              contactText="Contact Me"
-              avatarUrl="/itz_me.png"
-              showUserInfo={true}
-              enableTilt={true}
-              enableMobileTilt={false}
-              onContactClick={() => window.location.href = 'mailto:san_robin@outlook.com'}
-              behindGlowEnabled
-            />
+          <div className="about-highlights-horizontal">
+            <SpotlightCard spotlightColor="rgba(82, 39, 255, 0.15)">
+              <div className="highlight-item">
+                <div className="highlight-icon">🎓</div>
+                <div>
+                  <div className="highlight-label">Education</div>
+                  <div className="highlight-value">
+                    B.E. in CSE, Anna University Regional Campus Madurai (2023 – Present)
+                  </div>
+                </div>
+              </div>
+            </SpotlightCard>
+            <SpotlightCard spotlightColor="rgba(255, 159, 252, 0.15)">
+              <div className="highlight-item">
+                <div className="highlight-icon">🎯</div>
+                <div>
+                  <div className="highlight-label">Current Focus</div>
+                  <div className="highlight-value">
+                    Leading AWS cloud workshops & engineering real-time IoT vehicle tracking
+                  </div>
+                </div>
+              </div>
+            </SpotlightCard>
+            <SpotlightCard spotlightColor="rgba(180, 151, 207, 0.15)">
+              <div className="highlight-item">
+                <div className="highlight-icon">🌐</div>
+                <div>
+                  <div className="highlight-label">Languages</div>
+                  <div className="highlight-value">
+                    English (IELTS 7.5) · Tamil (Native) · Japanese & French (Basic)
+                  </div>
+                </div>
+              </div>
+            </SpotlightCard>
           </div>
         </div>
       </AnimatedSection>
