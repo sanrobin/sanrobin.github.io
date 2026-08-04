@@ -3,6 +3,7 @@ import LiquidEther from './components/LiquidEther/LiquidEther';
 import SpotlightCard from './components/SpotlightCard/SpotlightCard';
 import ClickSpark from './components/ClickSpark/ClickSpark';
 import Dock from './components/Dock/Dock';
+import ProfileCard from './components/ProfileCard/ProfileCard';
 import { VscHome, VscCode, VscBriefcase, VscBook, VscSymbolMethod } from 'react-icons/vsc';
 import './App.css';
 /* ── Data ──────────────────────────────────────────── */
@@ -283,54 +284,71 @@ export default function App() {
           </h2>
         </div>
         <div className="about-grid">
-          <div className="about-text">
-            <p>
-              Based in Tamil Nadu, India, I am an ambitious Computer Science undergraduate at Anna University
-              Regional Campus Madurai. My work spans the complete software development spectrum—from low-level
-              Embedded C and IoT hardware to Python-based machine learning models and natural language processing
-              tools.
-            </p>
-            <p>
-              I thrive at the intersection of systems experimentation and practical application. Whether I am
-              optimizing Linux desktop environments, auditing system security, or directing campus-wide cloud
-              literacy workshops, I love turning complex technical challenges into intuitive, user-friendly
-              solutions.
-            </p>
+          <div className="about-left">
+            <div className="about-text">
+              <p>
+                Based in Tamil Nadu, India, I am an ambitious Computer Science undergraduate at Anna University
+                Regional Campus Madurai. My work spans the complete software development spectrum—from low-level
+                Embedded C and IoT hardware to Python-based machine learning models and natural language processing
+                tools.
+              </p>
+              <p>
+                I thrive at the intersection of systems experimentation and practical application. Whether I am
+                optimizing Linux desktop environments, auditing system security, or directing campus-wide cloud
+                literacy workshops, I love turning complex technical challenges into intuitive, user-friendly
+                solutions.
+              </p>
+            </div>
+            <div className="about-highlights">
+              <SpotlightCard spotlightColor="rgba(82, 39, 255, 0.15)">
+                <div className="highlight-item">
+                  <div className="highlight-icon">🎓</div>
+                  <div>
+                    <div className="highlight-label">Education</div>
+                    <div className="highlight-value">
+                      B.E. in CSE, Anna University Regional Campus Madurai (2023 – Present)
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
+              <SpotlightCard spotlightColor="rgba(255, 159, 252, 0.15)">
+                <div className="highlight-item">
+                  <div className="highlight-icon">🎯</div>
+                  <div>
+                    <div className="highlight-label">Current Focus</div>
+                    <div className="highlight-value">
+                      Leading AWS cloud workshops & engineering real-time IoT vehicle tracking
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
+              <SpotlightCard spotlightColor="rgba(180, 151, 207, 0.15)">
+                <div className="highlight-item">
+                  <div className="highlight-icon">🌐</div>
+                  <div>
+                    <div className="highlight-label">Languages</div>
+                    <div className="highlight-value">
+                      English (IELTS 7.5) · Tamil (Native) · Japanese & French (Basic)
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
+            </div>
           </div>
-          <div className="about-highlights">
-            <SpotlightCard spotlightColor="rgba(82, 39, 255, 0.15)">
-              <div className="highlight-item">
-                <div className="highlight-icon">🎓</div>
-                <div>
-                  <div className="highlight-label">Education</div>
-                  <div className="highlight-value">
-                    B.E. in CSE, Anna University Regional Campus Madurai (2023 – Present)
-                  </div>
-                </div>
-              </div>
-            </SpotlightCard>
-            <SpotlightCard spotlightColor="rgba(255, 159, 252, 0.15)">
-              <div className="highlight-item">
-                <div className="highlight-icon">🎯</div>
-                <div>
-                  <div className="highlight-label">Current Focus</div>
-                  <div className="highlight-value">
-                    Leading AWS cloud workshops & engineering real-time IoT vehicle tracking
-                  </div>
-                </div>
-              </div>
-            </SpotlightCard>
-            <SpotlightCard spotlightColor="rgba(180, 151, 207, 0.15)">
-              <div className="highlight-item">
-                <div className="highlight-icon">🌐</div>
-                <div>
-                  <div className="highlight-label">Languages</div>
-                  <div className="highlight-value">
-                    English (IELTS 7.5) · Tamil (Native) · Japanese & French (Basic)
-                  </div>
-                </div>
-              </div>
-            </SpotlightCard>
+          <div className="about-right">
+            <ProfileCard
+              name="Sanjay M"
+              title="Tech Enthusiast and Student"
+              handle="sanrobin"
+              status="Online"
+              contactText="Contact Me"
+              avatarUrl="/itz_me.png"
+              showUserInfo={true}
+              enableTilt={true}
+              enableMobileTilt={false}
+              onContactClick={() => window.location.href = 'mailto:san_robin@outlook.com'}
+              behindGlowEnabled
+            />
           </div>
         </div>
       </AnimatedSection>
