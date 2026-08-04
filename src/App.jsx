@@ -291,7 +291,7 @@ export default function App() {
         <div className="section-header">
           <span className="section-label">// About Me</span>
           <h2 className="section-title">
-            Hey, I&apos;m <span className="gradient-text">Phoenix</span> 👋
+            Hey, I&apos;m <span className="gradient-text">Sanjay</span> 👋
           </h2>
         </div>
         <div className="about-grid">
@@ -486,14 +486,14 @@ export default function App() {
               ⌘ GitHub
             </a>
             <a
-              href="https://linkedin.com/in/"
+              href="https://linkedin.com/in/sanrobin"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link"
             >
               ◉ LinkedIn
             </a>
-            <a href="mailto:contact@phoenixphan0.me" className="footer-link">
+            <a href="mailto:san_robin@outlook.com" className="footer-link">
               ✉ Email
             </a>
           </div>
