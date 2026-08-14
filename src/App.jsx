@@ -4,169 +4,127 @@ import SpotlightCard from './components/SpotlightCard/SpotlightCard';
 import ClickSpark from './components/ClickSpark/ClickSpark';
 import Dock from './components/Dock/Dock';
 import ProfileCard from './components/ProfileCard/ProfileCard';
-import { VscHome, VscCode, VscBriefcase, VscBook, VscSymbolMethod } from 'react-icons/vsc';
+import StrokeText from './components/StrokeText/StrokeText';
+import ContactForm from './components/ContactForm/ContactForm';
+import SpecularButton from './components/SpecularButton/SpecularButton';
+import {
+  FiSun,
+  FiMoon,
+  FiHome,
+  FiUser,
+  FiCode,
+  FiBriefcase,
+  FiLayers,
+  FiCloud,
+  FiCpu,
+  FiTool,
+  FiUsers,
+  FiShield,
+  FiGlobe,
+  FiTerminal,
+  FiVideo,
+  FiHeadphones,
+  FiDatabase,
+  FiAward,
+  FiTarget,
+  FiMail,
+  FiGithub,
+  FiLinkedin,
+  FiCheckCircle,
+  FiHeart,
+  FiCompass,
+  FiLock
+} from 'react-icons/fi';
 import './App.css';
-/* ── Data ──────────────────────────────────────────── */
 
-const skills = [
-  {
-    icon: '💻',
-    title: 'Programming Languages',
-    items: ['Python', 'Java', 'C', 'Embedded C', 'HTML', 'CSS', 'JavaScript'],
-  },
-  {
-    icon: '☁️',
-    title: 'Cloud & Architecture',
-    items: ['AWS Cloud Foundations', 'Serverless Concepts', 'IoT Integration'],
-  },
-  {
-    icon: '🧠',
-    title: 'Data & AI/ML',
-    items: ['MySQL', 'scikit-learn', 'pandas', 'NLTK', 'Google Gemini API'],
-  },
-  {
-    icon: '🔌',
-    title: 'Hardware & Edge',
-    items: ['ESP32', 'Raspberry Pi 5', 'GSM/GPS Modules', 'Audio/Camera Modules'],
-  },
-  {
-    icon: '🛠️',
-    title: 'Tools & Platforms',
-    items: ['Git', 'VS Code', 'Android Studio', 'Linux Environments', 'Windows'],
-  },
-  {
-    icon: '🎯',
-    title: 'Soft Skills & Leadership',
-    items: ['Team Leadership', 'Public Speaking', 'Collaborative Problem Solving'],
-  },
-];
+/* ── Dynamic Data from CMS JSON ──────────────────── */
 
-const experience = [
-  {
-    date: 'February 2026 – Present',
-    title: 'Tech Team Lead',
-    org: 'AWS Student Builder Group AURCM',
-    location: 'Madurai, India',
-    points: [
-      'Directing technical initiatives, student study groups, and hands-on workshops centered on AWS cloud architecture.',
-      'Fostering a campus-wide culture of cloud literacy, practical experimentation, and peer-led learning.',
-    ],
-  },
-  {
-    date: 'July 2025 – February 2026',
-    title: 'Tech Team Volunteer',
-    org: 'AWS Cloud Club AURCM',
-    location: 'Madurai, India',
-    points: [
-      'Supported infrastructure setup, live demos, and technical troubleshooting for large-scale campus events.',
-      'Contributed to the successful execution of AWS Student Community Day and Amazon Q workshops.',
-    ],
-  },
-  {
-    date: 'January 2025 – March 2025',
-    title: 'Cyber Security Intern',
-    org: 'LearnTechzo',
-    location: 'Remote',
-    points: [
-      'Conducted remote security audits and system vulnerability assessments on web and network architectures.',
-      'Implemented defensive security measures and designed privacy-conscious system improvements.',
-    ],
-  },
-];
+import bioData from '../content/bio.json';
+import projectsData from '../content/projects.json';
+import experienceData from '../content/experience.json';
 
-const projects = [
-  {
-    date: 'March 2026 – Present',
-    title: 'GPS + IoT-Based Vehicle Monitoring System',
-    concept: 'A real-time hardware and software telemetry tracking solution for vehicle logistics.',
-    desc: 'Integrates an ESP32 microcontroller with GPS antenna and GSM modules to continuously monitor geographic location, route history, and payload weight changes.',
-    tech: ['Embedded C', 'ESP32', 'GPS Antenna', 'GSM Module', 'HTML', 'CSS', 'Python', 'MySQL'],
-  },
-  {
-    date: 'December 2024 – July 2025',
-    title: 'Welcome Robot Assistant',
-    concept: 'An interactive, edge-AI desk assistant powered by a Raspberry Pi 5.',
-    desc: 'Employs Vosk for offline speech recognition, Google Gemini for intelligent conversational responses, and ElevenLabs APIs for lifelike voice synthesis.',
-    tech: ['Python', 'Gemini API', 'ElevenLabs API', 'Vosk', 'Raspberry Pi 5', 'Camera Module 3'],
-  },
-  {
-    date: 'October 2025 – December 2025',
-    title: 'Text Cleaning & Preprocessing Utility',
-    concept: 'A dedicated NLP tool that cleans and standardizes raw text.',
-    desc: 'Automates the ingestion of DOCX and PDF documents, performing tokenization, stopword removal, and lemmatization for normalized dataset generation.',
-    tech: ['Python', 'NLTK'],
-  },
-  {
-    date: 'September 2025 – November 2025',
-    title: 'IBM-Styled Login & Authentication Portal',
-    concept: 'A modern, accessible front-end authentication experience.',
-    desc: 'Engineered an IBM-inspired visual layout with a strong emphasis on clean UI/UX principles, responsiveness, and web accessibility standards.',
-    tech: ['Python', 'HTML', 'CSS', 'JavaScript'],
-  },
-  {
-    date: 'April 2025 – May 2025',
-    title: 'Mushroom Classification ML Model',
-    concept: 'A supervised classification model to distinguish edible from poisonous mushrooms.',
-    desc: 'Implements the ID3 Decision Tree algorithm to evaluate biological dataset attributes with high accuracy.',
-    tech: ['Python', 'scikit-learn', 'pandas'],
-  },
-];
+const { skills, certifications, interests } = bioData;
 
-const certifications = [
-  {
-    category: 'Cloud & Modern Infrastructure',
-    icon: '☁️',
-    items: [
-      'AWS Cloud Quest: Cloud Practitioner',
-      'AWS Student Community Day South TN',
-      'Amazon Q Workshop Participation',
-    ],
-  },
-  {
-    category: 'Cybersecurity & Web Technologies',
-    icon: '🔒',
-    items: [
-      'NPTEL Certification in Cyber Security and Privacy',
-      'IBM Front-End Technologies Training Program',
-      'LearnTechzo Cyber Security Internship Certificate',
-    ],
-  },
-  {
-    category: 'Global Communication',
-    icon: '🌍',
-    items: ['IELTS Score: 7.5 — Professional English Proficiency'],
-  },
-];
+/* ── Monochrome Icon Helper ────────────────────────── */
 
-const interests = [
-  {
-    icon: '🐧',
-    title: 'Linux & OS Experimentation',
-    desc: 'Customizing open-source operating systems, tinkering with system interfaces, and exploring desktop environments.',
-  },
-  {
-    icon: '🏴‍☠️',
-    title: 'Cybersecurity & CTF',
-    desc: 'Challenging my understanding of system security through practical challenges and vulnerability analysis.',
-  },
-  {
-    icon: '🎬',
-    title: 'Digital Content Creation',
-    desc: 'Combining technical storytelling with visual media to produce engaging multimedia content.',
-  },
-  {
-    icon: '🎧',
-    title: 'Audio Equipment & Gaming',
-    desc: 'Appreciating high-fidelity audio formats and exploring immersive open-world gaming experiences.',
-  },
-];
+function MonochromeIcon({ name, size = 20, className = '' }) {
+  const iconMap = {
+    code: <FiCode size={size} className={className} />,
+    cloud: <FiCloud size={size} className={className} />,
+    database: <FiDatabase size={size} className={className} />,
+    cpu: <FiCpu size={size} className={className} />,
+    hardware: <FiCpu size={size} className={className} />,
+    tool: <FiTool size={size} className={className} />,
+    users: <FiUsers size={size} className={className} />,
+    shield: <FiShield size={size} className={className} />,
+    globe: <FiGlobe size={size} className={className} />,
+    terminal: <FiTerminal size={size} className={className} />,
+    video: <FiVideo size={size} className={className} />,
+    headphones: <FiHeadphones size={size} className={className} />,
+    target: <FiTarget size={size} className={className} />,
+    award: <FiAward size={size} className={className} />,
+    mail: <FiMail size={size} className={className} />,
+    github: <FiGithub size={size} className={className} />,
+    linkedin: <FiLinkedin size={size} className={className} />
+  };
+
+  return iconMap[name] || <FiCode size={size} className={className} />;
+}
+
+/* ── Theme Hook ────────────────────────────────────── */
+
+function useTheme() {
+  const [theme, setTheme] = useState(() => {
+    // Check localStorage first, then OS preference
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('portfolio-theme');
+      if (stored === 'light' || stored === 'dark') return stored;
+      if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+    }
+    return 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolio-theme', theme);
+  }, [theme]);
+
+  // Listen for OS theme changes (only when user hasn't manually set a preference)
+  useEffect(() => {
+    const mql = window.matchMedia('(prefers-color-scheme: light)');
+    const handleChange = (e) => {
+      const stored = localStorage.getItem('portfolio-theme');
+      // Only auto-switch if user hasn't manually toggled
+      if (!stored) {
+        setTheme(e.matches ? 'light' : 'dark');
+      }
+    };
+    mql.addEventListener('change', handleChange);
+    return () => mql.removeEventListener('change', handleChange);
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('portfolio-theme', next);
+      return next;
+    });
+  }, []);
+
+  return { theme, toggleTheme };
+}
+
+/* ── Dock Navigation (All Sections) ───────────────── */
 
 const dockItems = [
-  { icon: <VscHome size={18} />, label: 'Home', onClick: () => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }) },
-  { icon: <VscCode size={18} />, label: 'Skills', onClick: () => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' }) },
-  { icon: <VscBriefcase size={18} />, label: 'Experience', onClick: () => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' }) },
-  { icon: <VscSymbolMethod size={18} />, label: 'Projects', onClick: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) },
-  { icon: <VscBook size={18} />, label: 'Certs', onClick: () => document.getElementById('certifications')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <FiHome size={18} />, label: 'Home', onClick: () => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <FiUser size={18} />, label: 'About', onClick: () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <FiCode size={18} />, label: 'Skills', onClick: () => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <FiBriefcase size={18} />, label: 'Experience', onClick: () => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <FiLayers size={18} />, label: 'Projects', onClick: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <FiAward size={18} />, label: 'Certs', onClick: () => document.getElementById('certifications')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <FiCompass size={18} />, label: 'Interests', onClick: () => document.getElementById('interests')?.scrollIntoView({ behavior: 'smooth' }) },
+  { icon: <FiMail size={18} />, label: 'Contact', onClick: () => document.getElementById('reachout')?.scrollIntoView({ behavior: 'smooth' }) },
 ];
 
 /* ── Scroll animation hook ──────────────────────── */
@@ -209,6 +167,7 @@ function AnimatedSection({ children, className = '', id }) {
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -219,11 +178,47 @@ export default function App() {
   const handleNavClick = useCallback(() => setMenuOpen(false), []);
 
   return (
-    <ClickSpark sparkColor="#B497CF" sparkSize={12} sparkRadius={20} sparkCount={10} duration={500}>
+    <ClickSpark sparkColor="#FF6B6B" sparkSize={12} sparkRadius={20} sparkCount={10} duration={500}>
+      {/* Theme Toggle — Top Left with Frosted Look */}
+      <div className="theme-toggle">
+        <SpecularButton
+          size="sm"
+          radius={14}
+          tint={theme === 'dark' ? '#0d0d14' : '#ffffff'}
+          tintOpacity={theme === 'dark' ? 0.65 : 0.75}
+          blur={20}
+          textColor={theme === 'dark' ? '#f0eef6' : '#1A1A2E'}
+          lineColor={theme === 'dark' ? '#DC143C' : '#B91C3A'}
+          baseColor={theme === 'dark' ? '#444444' : '#bbbbbb'}
+          intensity={1.2}
+          shineSize={14}
+          shineFade={40}
+          thickness={1.2}
+          speed={0.35}
+          followMouse
+          proximity={200}
+          autoAnimate={false}
+          onClick={toggleTheme}
+          className="theme-toggle-btn"
+        >
+          <span className="theme-toggle-icon">
+            {theme === 'dark' ? (
+              <>
+                <FiSun size={14} /> <span>Switch to Light</span>
+              </>
+            ) : (
+              <>
+                <FiMoon size={14} /> <span>Switch to Dark</span>
+              </>
+            )}
+          </span>
+        </SpecularButton>
+      </div>
+
       {/* Fixed LiquidEther Background */}
       <div className="liquid-bg">
         <LiquidEther
-          colors={['#5227FF', '#FF9FFC', '#B497CF']}
+          colors={['#DC143C', '#E8751A', '#FF6B6B']}
           mouseForce={20}
           cursorSize={100}
           resolution={0.5}
@@ -237,12 +232,13 @@ export default function App() {
         />
       </div>
 
-      {/* Navigation Dock */}
+      {/* Navigation Dock (Themed & Comprehensive) */}
       <Dock 
         items={dockItems}
-        panelHeight={68}
-        baseItemSize={50}
-        magnification={70}
+        panelHeight={66}
+        baseItemSize={44}
+        magnification={60}
+        distance={140}
       />
 
       {/* Hero */}
@@ -252,13 +248,25 @@ export default function App() {
             <span className="dot"></span>
             Available for collaborations
           </div>
-          <h1>
-            <span className="gradient-text">Sanjay</span>
-            <br />
-            Maheswaran
-          </h1>
+          <div className="hero-stroke-title">
+            <StrokeText
+              text="Sanjay Maheswaran"
+              strokeColor="#DC143C"
+              fillColor={theme === 'dark' ? '#F8FAFC' : '#1A1A2E'}
+              strokeWidth={1.4}
+              drawDuration={1.6}
+              fillDelay={0.2}
+              stagger={0.05}
+              ease="power2.out"
+              trigger="mount"
+              fillMode="wipe"
+              fontSize={128}
+              fontWeight={800}
+              letterSpacing={-4}
+            />
+          </div>
           <p className="hero-subtitle">
-            Computer Science &amp; Engineering Student · Cloud Architecture Advocate · Full-Stack &amp; IoT Developer
+            {bioData.heroSubtitle}
           </p>
           <div className="hero-cta">
             <a href="#projects" className="btn btn-primary">
@@ -282,68 +290,66 @@ export default function App() {
               <div className="section-header">
                 <span className="section-label">// About Me</span>
                 <h2 className="section-title">
-                  Hey, I&apos;m <span className="gradient-text">Sanjay</span> 👋
+                  Hey, I&apos;m <span className="gradient-text">{bioData.name.split(' ')[0]}</span>
                 </h2>
               </div>
-              <p>
-                Based in Tamil Nadu, India, I am an ambitious Computer Science undergraduate at Anna University
-                Regional Campus Madurai. My work spans the complete software development spectrum—from low-level
-                Embedded C and IoT hardware to Python-based machine learning models and natural language processing
-                tools.
-              </p>
-              <p>
-                I thrive at the intersection of systems experimentation and practical application. Whether I am
-                optimizing Linux desktop environments, auditing system security, or directing campus-wide cloud
-                literacy workshops, I love turning complex technical challenges into intuitive, user-friendly
-                solutions.
-              </p>
+              {bioData.aboutParagraphs.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
             </div>
             <div className="about-profile">
               <ProfileCard
-                name="Sanjay M"
-                title="Tech Enthusiast and Student"
-                handle="sanrobin"
-                status="Online"
+                name={bioData.name.split(' ')[0] + ' ' + (bioData.name.split(' ')[1]?.charAt(0) || '')}
+                title={bioData.title}
+                handle={bioData.handle}
+                status={bioData.status}
                 contactText="Contact Me"
                 avatarUrl="/itz_me.png"
                 showUserInfo={true}
                 enableTilt={true}
                 enableMobileTilt={false}
-                onContactClick={() => window.location.href = 'mailto:san_robin@outlook.com'}
+                onContactClick={() => window.location.href = `mailto:${bioData.email}`}
                 behindGlowEnabled
+                behindGlowColor="rgba(220, 20, 60, 0.65)"
               />
             </div>
           </div>
           <div className="about-highlights-horizontal">
-            <SpotlightCard spotlightColor="rgba(82, 39, 255, 0.15)">
+            <SpotlightCard spotlightColor="rgba(220, 20, 60, 0.15)">
               <div className="highlight-item">
-                <div className="highlight-icon">🎓</div>
+                <div className="highlight-icon">
+                  <FiAward size={20} />
+                </div>
                 <div>
                   <div className="highlight-label">Education</div>
                   <div className="highlight-value">
-                    B.E. in CSE, Anna University Regional Campus Madurai (2023 – Present)
+                    {bioData.education}
                   </div>
                 </div>
               </div>
             </SpotlightCard>
-            <SpotlightCard spotlightColor="rgba(255, 159, 252, 0.15)">
+            <SpotlightCard spotlightColor="rgba(232, 117, 26, 0.15)">
               <div className="highlight-item">
-                <div className="highlight-icon">🎯</div>
+                <div className="highlight-icon">
+                  <FiTarget size={20} />
+                </div>
                 <div>
                   <div className="highlight-label">Current Focus</div>
                   <div className="highlight-value">
-                    Leading AWS cloud workshops & engineering real-time IoT vehicle tracking
+                    {bioData.currentFocus}
                   </div>
                 </div>
               </div>
             </SpotlightCard>
-            <SpotlightCard spotlightColor="rgba(180, 151, 207, 0.15)">
+            <SpotlightCard spotlightColor="rgba(255, 107, 107, 0.15)">
               <div className="highlight-item">
-                <div className="highlight-icon">🌐</div>
+                <div className="highlight-icon">
+                  <FiGlobe size={20} />
+                </div>
                 <div>
                   <div className="highlight-label">Languages</div>
                   <div className="highlight-value">
-                    English (IELTS 7.5) · Tamil (Native) · Japanese & French (Basic)
+                    {bioData.languages}
                   </div>
                 </div>
               </div>
@@ -363,9 +369,11 @@ export default function App() {
         </div>
         <div className="skills-grid">
           {skills.map((cat) => (
-            <SpotlightCard key={cat.title} spotlightColor="rgba(82, 39, 255, 0.15)">
+            <SpotlightCard key={cat.title} spotlightColor="rgba(220, 20, 60, 0.15)">
               <div className="skill-card-title">
-                <span className="skill-card-icon">{cat.icon}</span>
+                <span className="skill-card-icon">
+                  <MonochromeIcon name={cat.icon} size={18} />
+                </span>
                 {cat.title}
               </div>
               <div className="skill-tags">
@@ -387,7 +395,7 @@ export default function App() {
           <h2 className="section-title">Leadership & Professional Journey</h2>
         </div>
         <div className="timeline">
-          {experience.map((exp, i) => (
+          {experienceData.map((exp, i) => (
             <div key={i} className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-date">{exp.date}</div>
@@ -415,8 +423,8 @@ export default function App() {
           </p>
         </div>
         <div className="projects-grid">
-          {projects.map((proj, i) => (
-            <SpotlightCard key={i} spotlightColor="rgba(255, 159, 252, 0.12)">
+          {projectsData.map((proj, i) => (
+            <SpotlightCard key={i} spotlightColor="rgba(232, 117, 26, 0.12)">
               <div className="project-date">{proj.date}</div>
               <div className="project-title">{proj.title}</div>
               <div className="project-concept">{proj.concept}</div>
@@ -441,15 +449,18 @@ export default function App() {
         </div>
         <div className="certs-grid">
           {certifications.map((cert, i) => (
-            <SpotlightCard key={i} spotlightColor="rgba(180, 151, 207, 0.15)">
+            <SpotlightCard key={i} spotlightColor="rgba(255, 107, 107, 0.15)">
               <div className="cert-category">
-                {cert.icon} {cert.category}
+                <span className="cert-category-icon">
+                  <MonochromeIcon name={cert.icon} size={16} />
+                </span>
+                {cert.category}
               </div>
               <ul className="cert-list">
                 {cert.items.map((item, j) => (
                   <li key={j}>
-                    <span className="cert-icon">✦</span>
-                    {item}
+                    <FiCheckCircle size={14} className="cert-icon" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -469,14 +480,30 @@ export default function App() {
         </div>
         <div className="interests-grid">
           {interests.map((item, i) => (
-            <SpotlightCard key={i} spotlightColor="rgba(82, 39, 255, 0.1)">
-              <span className="interest-icon">{item.icon}</span>
+            <SpotlightCard key={i} spotlightColor="rgba(220, 20, 60, 0.1)">
+              <div className="interest-icon-wrapper">
+                <MonochromeIcon name={item.icon} size={28} className="interest-icon" />
+              </div>
               <div className="interest-title">{item.title}</div>
               <div className="interest-desc">{item.desc}</div>
             </SpotlightCard>
           ))}
         </div>
       </AnimatedSection>
+
+      {/* Reach Out — Contact Form */}
+      <section className="reachout-section" id="reachout">
+        <div className="reachout-container">
+          <div className="section-header" style={{ textAlign: 'center' }}>
+            <span className="section-label">// Get In Touch</span>
+            <h2 className="section-title">Reach Out</h2>
+            <p className="section-desc" style={{ margin: '0 auto' }}>
+              Interested in collaborating, hiring, or just saying hello? Drop me a message.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="footer" id="footer">
@@ -488,7 +515,7 @@ export default function App() {
               rel="noopener noreferrer"
               className="footer-link"
             >
-              ⌘ GitHub
+              <FiGithub size={15} /> <span>GitHub</span>
             </a>
             <a
               href="https://linkedin.com/in/sanrobin"
@@ -496,16 +523,21 @@ export default function App() {
               rel="noopener noreferrer"
               className="footer-link"
             >
-              ◉ LinkedIn
+              <FiLinkedin size={15} /> <span>LinkedIn</span>
             </a>
-            <a href="mailto:san_robin@outlook.com" className="footer-link">
-              ✉ Email
+            <a href={`mailto:${bioData.email}`} className="footer-link">
+              <FiMail size={15} /> <span>Email</span>
             </a>
           </div>
-          <p className="footer-copy">
-            © {new Date().getFullYear()} Sanjay Maheswaran. Built with{' '}
-            <span className="heart">♥</span> and React.
-          </p>
+          <div className="footer-bottom">
+            <p className="footer-copy">
+              © {new Date().getFullYear()} {bioData.name}. Built with{' '}
+              <FiHeart size={13} className="heart" /> and React
+            </p>
+            <a href="/admin" className="footer-login-btn" title="Admin Login / Content Manager">
+              <FiLock size={12} /> <span>Admin Login</span>
+            </a>
+          </div>
         </div>
       </footer>
     </ClickSpark>

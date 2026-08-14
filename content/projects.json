@@ -1,0 +1,37 @@
+[
+  {
+    "date": "March 2026 – Present",
+    "title": "GPS + IoT-Based Vehicle Monitoring System",
+    "concept": "A real-time hardware and software telemetry tracking solution for vehicle logistics.",
+    "desc": "Integrates an ESP32 microcontroller with GPS antenna and GSM modules to continuously monitor geographic location, route history, and payload weight changes.",
+    "tech": ["Embedded C", "ESP32", "GPS Antenna", "GSM Module", "HTML", "CSS", "Python", "MySQL"]
+  },
+  {
+    "date": "December 2024 – July 2025",
+    "title": "Welcome Robot Assistant",
+    "concept": "An interactive, edge-AI desk assistant powered by a Raspberry Pi 5.",
+    "desc": "Employs Vosk for offline speech recognition, Google Gemini for intelligent conversational responses, and ElevenLabs APIs for lifelike voice synthesis.",
+    "tech": ["Python", "Gemini API", "ElevenLabs API", "Vosk", "Raspberry Pi 5", "Camera Module 3"]
+  },
+  {
+    "date": "October 2025 – December 2025",
+    "title": "Text Cleaning & Preprocessing Utility",
+    "concept": "A dedicated NLP tool that cleans and standardizes raw text.",
+    "desc": "Automates the ingestion of DOCX and PDF documents, performing tokenization, stopword removal, and lemmatization for normalized dataset generation.",
+    "tech": ["Python", "NLTK"]
+  },
+  {
+    "date": "September 2025 – November 2025",
+    "title": "IBM-Styled Login & Authentication Portal",
+    "concept": "A modern, accessible front-end authentication experience.",
+    "desc": "Engineered an IBM-inspired visual layout with a strong emphasis on clean UI/UX principles, responsiveness, and web accessibility standards.",
+    "tech": ["Python", "HTML", "CSS", "JavaScript"]
+  },
+  {
+    "date": "April 2025 – May 2025",
+    "title": "Mushroom Classification ML Model",
+    "concept": "A supervised classification model to distinguish edible from poisonous mushrooms.",
+    "desc": "Implements the ID3 Decision Tree algorithm to evaluate biological dataset attributes with high accuracy.",
+    "tech": ["Python", "scikit-learn", "pandas"]
+  }
+]

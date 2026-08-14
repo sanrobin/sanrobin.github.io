@@ -1,0 +1,94 @@
+{
+  "name": "Sanjay Maheswaran",
+  "handle": "sanrobin",
+  "title": "Tech Enthusiast and Student",
+  "status": "Online",
+  "email": "san_robin@outlook.com",
+  "heroSubtitle": "Computer Science & Engineering Student · Cloud Architecture Advocate · Full-Stack & IoT Developer",
+  "aboutParagraphs": [
+    "Based in Tamil Nadu, India, I am an ambitious Computer Science undergraduate at Anna University Regional Campus Madurai. My work spans the complete software development spectrum—from low-level Embedded C and IoT hardware to Python-based machine learning models and natural language processing tools.",
+    "I thrive at the intersection of systems experimentation and practical application. Whether I am optimizing Linux desktop environments, auditing system security, or directing campus-wide cloud literacy workshops, I love turning complex technical challenges into intuitive, user-friendly solutions."
+  ],
+  "education": "B.E. in CSE, Anna University Regional Campus Madurai (2023 – Present)",
+  "currentFocus": "Leading AWS cloud workshops & engineering real-time IoT vehicle tracking",
+  "languages": "English (IELTS 7.5) · Tamil (Native) · Japanese & French (Basic)",
+  "skills": [
+    {
+      "icon": "code",
+      "title": "Programming Languages",
+      "items": ["Python", "Java", "C", "Embedded C", "HTML", "CSS", "JavaScript"]
+    },
+    {
+      "icon": "cloud",
+      "title": "Cloud & Architecture",
+      "items": ["AWS Cloud Foundations", "Serverless Concepts", "IoT Integration"]
+    },
+    {
+      "icon": "database",
+      "title": "Data & AI/ML",
+      "items": ["MySQL", "scikit-learn", "pandas", "NLTK", "Google Gemini API"]
+    },
+    {
+      "icon": "cpu",
+      "title": "Hardware & Edge",
+      "items": ["ESP32", "Raspberry Pi 5", "GSM/GPS Modules", "Audio/Camera Modules"]
+    },
+    {
+      "icon": "tool",
+      "title": "Tools & Platforms",
+      "items": ["Git", "VS Code", "Android Studio", "Linux Environments", "Windows"]
+    },
+    {
+      "icon": "users",
+      "title": "Soft Skills & Leadership",
+      "items": ["Team Leadership", "Public Speaking", "Collaborative Problem Solving"]
+    }
+  ],
+  "certifications": [
+    {
+      "category": "Cloud & Modern Infrastructure",
+      "icon": "cloud",
+      "items": [
+        "AWS Cloud Quest: Cloud Practitioner",
+        "AWS Student Community Day South TN",
+        "Amazon Q Workshop Participation"
+      ]
+    },
+    {
+      "category": "Cybersecurity & Web Technologies",
+      "icon": "shield",
+      "items": [
+        "NPTEL Certification in Cyber Security and Privacy",
+        "IBM Front-End Technologies Training Program",
+        "LearnTechzo Cyber Security Internship Certificate"
+      ]
+    },
+    {
+      "category": "Global Communication",
+      "icon": "globe",
+      "items": ["IELTS Score: 7.5 — Professional English Proficiency"]
+    }
+  ],
+  "interests": [
+    {
+      "icon": "terminal",
+      "title": "Linux & OS Experimentation",
+      "desc": "Customizing open-source operating systems, tinkering with system interfaces, and exploring desktop environments."
+    },
+    {
+      "icon": "shield",
+      "title": "Cybersecurity & CTF",
+      "desc": "Challenging my understanding of system security through practical challenges and vulnerability analysis."
+    },
+    {
+      "icon": "video",
+      "title": "Digital Content Creation",
+      "desc": "Combining technical storytelling with visual media to produce engaging multimedia content."
+    },
+    {
+      "icon": "headphones",
+      "title": "Audio Equipment & Gaming",
+      "desc": "Appreciating high-fidelity audio formats and exploring immersive open-world gaming experiences."
+    }
+  ]
+}

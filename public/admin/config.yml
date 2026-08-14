@@ -1,0 +1,102 @@
+backend:
+  name: github
+  repo: sanrobin/sanrobin.github.io
+  branch: main
+  auth_type: pkce
+  app_id: Ov23li5eMJWkRSumATfJ
+
+publish_mode: simple
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "bio"
+    label: "Bio / About"
+    files:
+      - name: "bio"
+        label: "Bio & Personal Info"
+        file: "content/bio.json"
+        format: "json"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Handle", name: "handle", widget: "string" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Status", name: "status", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string" }
+          - label: "About Paragraphs"
+            name: "aboutParagraphs"
+            widget: "list"
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Education", name: "education", widget: "string" }
+          - { label: "Current Focus", name: "currentFocus", widget: "string" }
+          - { label: "Languages", name: "languages", widget: "string" }
+          - label: "Skills"
+            name: "skills"
+            widget: "list"
+            fields:
+              - { label: "Icon (e.g. code, cloud, database, cpu, tool, users)", name: "icon", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                field: { label: "Skill", name: "skill", widget: "string" }
+          - label: "Certifications"
+            name: "certifications"
+            widget: "list"
+            fields:
+              - { label: "Category", name: "category", widget: "string" }
+              - { label: "Icon (e.g. cloud, shield, globe)", name: "icon", widget: "string" }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                field: { label: "Certification", name: "cert", widget: "string" }
+          - label: "Interests"
+            name: "interests"
+            widget: "list"
+            fields:
+              - { label: "Icon (e.g. terminal, shield, video, headphones)", name: "icon", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "desc", widget: "text" }
+
+  - name: "projects"
+    label: "Projects"
+    files:
+      - name: "projects"
+        label: "All Projects"
+        file: "content/projects.json"
+        format: "json"
+        fields:
+          - label: "Projects"
+            name: "projects"
+            widget: "list"
+            fields:
+              - { label: "Date Range", name: "date", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Concept", name: "concept", widget: "text" }
+              - { label: "Description", name: "desc", widget: "text" }
+              - label: "Tech Stack"
+                name: "tech"
+                widget: "list"
+                field: { label: "Technology", name: "technology", widget: "string" }
+
+  - name: "experience"
+    label: "Experience"
+    files:
+      - name: "experience"
+        label: "All Experience"
+        file: "content/experience.json"
+        format: "json"
+        fields:
+          - label: "Experience"
+            name: "experience"
+            widget: "list"
+            fields:
+              - { label: "Date Range", name: "date", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Organization", name: "org", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - label: "Key Points"
+                name: "points"
+                widget: "list"
+                field: { label: "Point", name: "point", widget: "text" }
