@@ -10,24 +10,24 @@
 }
 
 :root {
-  /* Color Palette */
+  /* Color Palette — Red/Orange Warm Spectrum */
   --color-bg-primary: #06060b;
   --color-bg-secondary: #0d0d14;
   --color-bg-card: rgba(14, 14, 22, 0.65);
   --color-bg-card-hover: rgba(20, 20, 32, 0.8);
 
-  --color-accent-primary: #5227FF;
-  --color-accent-secondary: #FF9FFC;
-  --color-accent-tertiary: #B497CF;
-  --color-accent-glow: rgba(82, 39, 255, 0.15);
+  --color-accent-primary: #DC143C;       /* Crimson */
+  --color-accent-secondary: #E8751A;     /* Burnt Orange */
+  --color-accent-tertiary: #FF6B6B;      /* Coral */
+  --color-accent-glow: rgba(220, 20, 60, 0.15);
 
   --color-text-primary: #f0eef6;
   --color-text-secondary: #a8a3b8;
   --color-text-muted: #6b6580;
-  --color-text-accent: #c4a8ff;
+  --color-text-accent: #FFB088;          /* Warm Peach */
 
   --color-border: rgba(255, 255, 255, 0.06);
-  --color-border-hover: rgba(82, 39, 255, 0.35);
+  --color-border-hover: rgba(220, 20, 60, 0.35);
 
   /* Typography */
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -41,6 +41,27 @@
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---- Light Mode Overrides ---- */
+[data-theme="light"] {
+  --color-bg-primary: #FAF7F5;
+  --color-bg-secondary: #F0ECE8;
+  --color-bg-card: rgba(255, 255, 255, 0.75);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.9);
+
+  --color-accent-primary: #B91C3A;
+  --color-accent-secondary: #C96215;
+  --color-accent-tertiary: #E04545;
+  --color-accent-glow: rgba(185, 28, 58, 0.1);
+
+  --color-text-primary: #1A1A2E;
+  --color-text-secondary: #555568;
+  --color-text-muted: #8E8E9F;
+  --color-text-accent: #B34A1A;
+
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(185, 28, 58, 0.3);
 }
 
 html {
@@ -57,6 +78,7 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 #root {
@@ -91,17 +113,17 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(82, 39, 255, 0.3);
+  background: rgba(220, 20, 60, 0.3);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(82, 39, 255, 0.5);
+  background: rgba(220, 20, 60, 0.5);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(82, 39, 255, 0.35);
+  background: rgba(220, 20, 60, 0.35);
   color: #fff;
 }
 
