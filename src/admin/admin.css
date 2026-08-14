@@ -1,4 +1,4 @@
-﻿/* ================================================
+/* ================================================
    ADMIN PANEL — Design System
    Matches site palette: crimson/orange, deep dark bg
    Per-user instruction: background is pure black (#000)
@@ -74,6 +74,31 @@ html, body, #admin-root {
   100% { background-position: 0% 50%; }
 }
 
+/* --- Wrapper & Fixed DotField Background --- */
+.adm-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background: #000000;
+  overflow-x: hidden;
+}
+
+.adm-bg-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: #000000;
+}
+
+.adm-foreground {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
 /* ================================================
    LOGIN PAGE
    ================================================ */
@@ -82,7 +107,7 @@ html, body, #admin-root {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--adm-bg);
+  background: transparent;
   position: relative;
   overflow: hidden;
   animation: fadeIn 0.5s ease;
@@ -270,15 +295,17 @@ html, body, #admin-root {
 .adm-shell {
   display: flex;
   min-height: 100vh;
-  background: var(--adm-bg);
+  background: transparent;
 }
 
 /* --- Sidebar --- */
 .adm-sidebar {
   width: 240px;
   flex-shrink: 0;
-  background: var(--adm-bg-surface);
+  background: rgba(10, 10, 16, 0.85);
   border-right: 1px solid var(--adm-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   padding: 1.5rem 0;
@@ -724,7 +751,7 @@ html, body, #admin-root {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background: var(--adm-bg);
+  background: transparent;
   color: var(--adm-text-secondary);
   font-size: 0.9rem;
 }
