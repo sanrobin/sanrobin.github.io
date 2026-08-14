@@ -4,7 +4,7 @@ config files for da website baby!!!
 My personal portfolio site built with React, Vite, and Decap CMS, hosted on GitHub Pages.
 
 - **Live Site:** [phoenixphan0.me](https://phoenixphan0.me)
-- **Admin Dashboard:** [phoenixphan0.me/admin](https://phoenixphan0.me/admin)
+- **Admin Dashboard:** [idk man i dont wanna](https://www.youtube.com/watch?v=XfELJU1mRMg)
 
 ---
 
@@ -21,5 +21,3 @@ My personal portfolio site built with React, Vite, and Decap CMS, hosted on GitH
 - **Clean Iconography:** Minimalist monochrome vector icons across all sections.
 
 ---
-## License
-MIT

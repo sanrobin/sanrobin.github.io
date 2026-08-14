@@ -90,7 +90,6 @@ function useTheme() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('portfolio-theme', theme);
   }, [theme]);
 
   // Listen for OS theme changes (only when user hasn't manually set a preference)
