@@ -16,7 +16,7 @@ export default defineConfig({
           const url = req.url ? req.url.split('?')[0] : '';
           if (url === '/admin' || url === '/admin/') {
             try {
-              const adminHtml = fs.readFileSync(path.resolve(__dirname, 'public/admin/index.html'), 'utf8');
+              const adminHtml = fs.readFileSync(path.resolve(__dirname, 'admin.html'), 'utf8');
               res.statusCode = 200;
               res.setHeader('Content-Type', 'text/html');
               return res.end(adminHtml);
@@ -29,4 +29,20 @@ export default defineConfig({
     }
   ],
   base: '/',
+  build: {
+    rollupOptions: {
+      input: {
+        main:  path.resolve(__dirname, 'index.html'),
+        admin: path.resolve(__dirname, 'admin.html'),
+      },
+      output: {
+        // Keep admin assets in their own folder
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.includes('admin')) return 'admin/assets/[name]-[hash][extname]';
+          return 'assets/[name]-[hash][extname]';
+        },
+      },
+    },
+  },
 })
+
