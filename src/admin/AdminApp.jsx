@@ -1,9 +1,9 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import LoginPage from './LoginPage';
 import Dashboard from './Dashboard';
 import './admin.css';
 
-const API = import.meta.env.VITE_API_URL || 'https://sanrobin-cms.vercel.app';
+const API = import.meta.env.VITE_API_URL || 'https://sanrobin-github-io-git-main-phoenix-f59c.vercel.app';
 
 export { API };
 
