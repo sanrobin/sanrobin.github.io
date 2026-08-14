@@ -36,6 +36,22 @@ export default defineConfig({
         admin: path.resolve(__dirname, 'admin.html'),
       },
       output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('three') || id.includes('ogl') || id.includes('gsap')) {
+              return 'vendor-3d';
+            }
+            if (id.includes('react-icons')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('motion')) {
+              return 'vendor-motion';
+            }
+            if (id.includes('react')) {
+              return 'vendor-react';
+            }
+          }
+        },
         // Keep admin assets in their own folder
         assetFileNames: (assetInfo) => {
           if (assetInfo.name && assetInfo.name.includes('admin')) return 'admin/assets/[name]-[hash][extname]';
