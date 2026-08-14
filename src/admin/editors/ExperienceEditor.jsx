@@ -1,4 +1,5 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import AnimatedList from '../../components/AnimatedList/AnimatedList';
 
 function useContentEditor(token, apiBase, file) {
   const [data, setData]     = useState(null);
@@ -113,27 +114,32 @@ export default function ExperienceEditor({ token, apiBase }) {
         <p className="adm-editor-desc">Add or update work experience, roles, and achievements.</p>
       </div>
 
-      {items.map((exp, i) => (
-        <div key={i} className="adm-card">
-          <div className="adm-card-title" style={{ justifyContent: 'space-between' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              {exp.title || `Experience ${i + 1}`}
-            </span>
-            <button className="adm-list-delete-btn" onClick={() => removeItem(i)}>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-              Remove
-            </button>
+      <AnimatedList
+        items={items}
+        showGradients={false}
+        enableArrowNavigation={false}
+        renderItem={(exp, i) => (
+          <div key={i} className="adm-card adm-animated-card">
+            <div className="adm-card-title" style={{ justifyContent: 'space-between' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                {exp.title || `Experience ${i + 1}`}
+              </span>
+              <button className="adm-list-delete-btn" onClick={() => removeItem(i)}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                Remove
+              </button>
+            </div>
+            <div className="adm-field-row">
+              <Field label="Date Range"    id={`exp-${i}-date`}     value={exp.date}     onChange={v => updateItem(i, 'date', v)} />
+              <Field label="Title / Role"  id={`exp-${i}-title`}    value={exp.title}    onChange={v => updateItem(i, 'title', v)} />
+              <Field label="Organization"  id={`exp-${i}-org`}      value={exp.org}      onChange={v => updateItem(i, 'org', v)} />
+              <Field label="Location"      id={`exp-${i}-location`} value={exp.location} onChange={v => updateItem(i, 'location', v)} />
+            </div>
+            <PointsField id={`exp-${i}-points`} items={exp.points || []} onChange={v => updateItem(i, 'points', v)} />
           </div>
-          <div className="adm-field-row">
-            <Field label="Date Range"    id={`exp-${i}-date`}     value={exp.date}     onChange={v => updateItem(i, 'date', v)} />
-            <Field label="Title / Role"  id={`exp-${i}-title`}    value={exp.title}    onChange={v => updateItem(i, 'title', v)} />
-            <Field label="Organization"  id={`exp-${i}-org`}      value={exp.org}      onChange={v => updateItem(i, 'org', v)} />
-            <Field label="Location"      id={`exp-${i}-location`} value={exp.location} onChange={v => updateItem(i, 'location', v)} />
-          </div>
-          <PointsField id={`exp-${i}-points`} items={exp.points || []} onChange={v => updateItem(i, 'points', v)} />
-        </div>
-      ))}
+        )}
+      />
 
       <button className="adm-add-item-btn" id="adm-add-experience" onClick={addItem}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>

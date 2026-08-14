@@ -290,40 +290,37 @@ html, body, #admin-root {
 }
 
 /* ================================================
-   DASHBOARD LAYOUT
+   DASHBOARD LAYOUT (DOCK NAVIGATION)
    ================================================ */
-.adm-shell {
-  display: flex;
-  min-height: 100vh;
-  background: transparent;
-}
-
-/* --- Sidebar --- */
-.adm-sidebar {
-  width: 240px;
-  flex-shrink: 0;
-  background: rgba(10, 10, 16, 0.85);
-  border-right: 1px solid var(--adm-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+.adm-dashboard-container {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 0;
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  min-height: 100vh;
+  background: transparent;
+  position: relative;
 }
 
-.adm-sidebar-logo {
+.adm-topbar {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0 1.25rem 1.5rem;
+  justify-content: space-between;
+  padding: 0.9rem clamp(1rem, 4vw, 3rem);
   border-bottom: 1px solid var(--adm-border);
-  margin-bottom: 1rem;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
-.adm-sidebar-logo-icon {
+.adm-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.adm-topbar-logo-icon {
   width: 32px;
   height: 32px;
   border-radius: 8px;
@@ -335,108 +332,32 @@ html, body, #admin-root {
   font-weight: 900;
   font-size: 0.85rem;
   flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(220, 20, 60, 0.35);
 }
 
-.adm-sidebar-logo-text {
-  font-size: 0.9rem;
+.adm-topbar-logo-text {
+  font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--adm-text);
 }
 
-.adm-nav {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 0 0.75rem;
-}
-
-.adm-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.65rem 0.85rem;
-  border-radius: 9px;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--adm-text-secondary);
-  cursor: pointer;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  transition: all 0.18s var(--adm-ease);
-  letter-spacing: 0.01em;
-}
-
-.adm-nav-item:hover {
-  background: rgba(220,20,60,0.08);
-  color: var(--adm-text);
-}
-
-.adm-nav-item.active {
-  background: rgba(220,20,60,0.14);
+.adm-topbar-badge {
+  font-family: var(--adm-mono);
+  font-size: 0.72rem;
   color: var(--adm-accent-peach);
-  border: 1px solid rgba(220,20,60,0.2);
-}
-
-.adm-nav-item svg { flex-shrink: 0; }
-
-.adm-sidebar-bottom {
-  padding: 1rem 0.75rem 0;
-  border-top: 1px solid var(--adm-border);
-  margin-top: auto;
-}
-
-.adm-logout-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  width: 100%;
-  padding: 0.65rem 0.85rem;
-  border-radius: 9px;
-  background: none;
-  border: 1px solid transparent;
-  color: var(--adm-text-muted);
-  font-size: 0.85rem;
+  background: rgba(220, 20, 60, 0.12);
+  border: 1px solid rgba(220, 20, 60, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.18s var(--adm-ease);
+  letter-spacing: 0.04em;
 }
 
-.adm-logout-btn:hover {
-  background: rgba(220,20,60,0.08);
-  border-color: rgba(220,20,60,0.2);
-  color: var(--adm-accent);
-}
-
-/* --- Main content area --- */
-.adm-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  overflow-y: auto;
-}
-
-.adm-topbar {
+.adm-topbar-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.1rem 2rem;
-  border-bottom: 1px solid var(--adm-border);
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(12px);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.adm-topbar-title {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  gap: 1rem;
 }
 
 .adm-topbar-user {
@@ -446,6 +367,101 @@ html, body, #admin-root {
   font-size: 0.82rem;
   color: var(--adm-text-secondary);
   font-family: var(--adm-mono);
+}
+
+.adm-topbar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.adm-top-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(220, 20, 60, 0.08);
+  border: 1px solid rgba(220, 20, 60, 0.2);
+  color: var(--adm-text-secondary);
+  font-family: var(--adm-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.adm-top-logout-btn:hover {
+  background: rgba(220, 20, 60, 0.18);
+  border-color: var(--adm-accent);
+  color: var(--adm-accent);
+  transform: translateY(-1px);
+}
+
+.adm-main-full {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.adm-content-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem clamp(1rem, 3vw, 2rem) 140px;
+  animation: fadeInUp 0.4s ease;
+}
+
+/* Floating Bottom Dock */
+.adm-dock-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1.25rem;
+}
+
+.adm-dock-wrapper .dock-outer {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.adm-dock-wrapper .dock-panel {
+  position: relative;
+  top: auto;
+  bottom: 0;
+  left: auto;
+  transform: none;
+  pointer-events: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  background-color: rgba(10, 10, 16, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.adm-dock-wrapper .dock-label {
+  top: -2.6rem;
+  bottom: auto;
+}
+
+.dock-item.dock-item-active {
+  border-color: var(--adm-accent);
+  background-color: rgba(220, 20, 60, 0.2);
+  color: var(--adm-accent-peach);
+  box-shadow: 0 0 16px var(--adm-accent-glow);
 }
 
 .adm-topbar-dot {
@@ -619,18 +635,27 @@ html, body, #admin-root {
   border-style: solid;
 }
 
+.adm-animated-card {
+  margin-bottom: 0 !important;
+}
+
 /* Save bar */
 .adm-save-bar {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
-  padding: 1.25rem 2rem;
-  border-top: 1px solid var(--adm-border);
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(12px);
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  background: rgba(10, 10, 16, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   position: sticky;
-  bottom: 0;
+  bottom: 5.5rem;
+  z-index: 40;
+  margin-top: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .adm-save-status {
