@@ -43,7 +43,11 @@ import bioData from '../content/bio.json';
 import projectsData from '../content/projects.json';
 import experienceData from '../content/experience.json';
 
-const { skills, certifications, interests } = bioData;
+const skills = bioData?.skills || [];
+const certifications = bioData?.certifications || [];
+const interests = bioData?.interests || [];
+const experienceList = Array.isArray(experienceData) ? experienceData : (experienceData?.experience || []);
+const projectsList = Array.isArray(projectsData) ? projectsData : (projectsData?.projects || []);
 
 /* ── Monochrome Icon Helper ────────────────────────── */
 
@@ -395,7 +399,7 @@ export default function App() {
           <h2 className="section-title">Leadership & Professional Journey</h2>
         </div>
         <div className="timeline">
-          {experienceData.map((exp, i) => (
+          {experienceList.map((exp, i) => (
             <div key={i} className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-date">{exp.date}</div>
@@ -423,7 +427,7 @@ export default function App() {
           </p>
         </div>
         <div className="projects-grid">
-          {projectsData.map((proj, i) => (
+          {projectsList.map((proj, i) => (
             <SpotlightCard key={i} spotlightColor="rgba(232, 117, 26, 0.12)">
               <div className="project-date">{proj.date}</div>
               <div className="project-title">{proj.title}</div>

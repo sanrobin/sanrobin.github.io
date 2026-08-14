@@ -1,32 +1,34 @@
-[
-  {
-    "date": "February 2026 – Present",
-    "title": "Tech Team Lead",
-    "org": "AWS Student Builder Group AURCM",
-    "location": "Madurai, India",
-    "points": [
-      "Directing technical initiatives, student study groups, and hands-on workshops centered on AWS cloud architecture.",
-      "Fostering a campus-wide culture of cloud literacy, practical experimentation, and peer-led learning."
-    ]
-  },
-  {
-    "date": "July 2025 – February 2026",
-    "title": "Tech Team Volunteer",
-    "org": "AWS Cloud Club AURCM",
-    "location": "Madurai, India",
-    "points": [
-      "Supported infrastructure setup, live demos, and technical troubleshooting for large-scale campus events.",
-      "Contributed to the successful execution of AWS Student Community Day and Amazon Q workshops."
-    ]
-  },
-  {
-    "date": "January 2025 – March 2025",
-    "title": "Cyber Security Intern",
-    "org": "LearnTechzo",
-    "location": "Remote",
-    "points": [
-      "Conducted remote security audits and system vulnerability assessments on web and network architectures.",
-      "Implemented defensive security measures and designed privacy-conscious system improvements."
-    ]
-  }
-]
+{
+  "experience": [
+    {
+      "date": "February 2026 – Present",
+      "title": "Tech Team Lead",
+      "org": "AWS Student Builder Group AURCM",
+      "location": "Madurai, India",
+      "points": [
+        "Directing technical initiatives, student study groups, and hands-on workshops centered on AWS cloud architecture.",
+        "Fostering a campus-wide culture of cloud literacy, practical experimentation, and peer-led learning."
+      ]
+    },
+    {
+      "date": "July 2025 – February 2026",
+      "title": "Tech Team Volunteer",
+      "org": "AWS Cloud Club AURCM",
+      "location": "Madurai, India",
+      "points": [
+        "Supported infrastructure setup, live demos, and technical troubleshooting for large-scale campus events.",
+        "Contributed to the successful execution of AWS Student Community Day and Amazon Q workshops."
+      ]
+    },
+    {
+      "date": "January 2025 – March 2025",
+      "title": "Cyber Security Intern",
+      "org": "LearnTechzo",
+      "location": "Remote",
+      "points": [
+        "Conducted remote security audits and system vulnerability assessments on web and network architectures.",
+        "Implemented defensive security measures and designed privacy-conscious system improvements."
+      ]
+    }
+  ]
+}
