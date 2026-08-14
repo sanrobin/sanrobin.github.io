@@ -21,5 +21,3 @@ My personal portfolio site built with React, Vite, and Decap CMS, hosted on GitH
 - **Clean Iconography:** Minimalist monochrome vector icons across all sections.
 
 ---
-## License
-MIT
