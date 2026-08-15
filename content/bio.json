@@ -2,7 +2,7 @@
   "name": "Sanjay Maheswaran",
   "handle": "sanrobin",
   "title": "Tech Enthusiast and Student",
-  "status": "Online",
+  "status": "Active",
   "email": "san_robin@outlook.com",
   "heroSubtitle": "Computer Science & Engineering Student · Cloud Architecture Advocate · Full-Stack & IoT Developer",
   "aboutParagraphs": [
@@ -16,32 +16,65 @@
     {
       "icon": "code",
       "title": "Programming Languages",
-      "items": ["Python", "Java", "C", "Embedded C", "HTML", "CSS", "JavaScript"]
+      "items": [
+        "Python",
+        "Java",
+        "C",
+        "Embedded C",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ]
     },
     {
       "icon": "cloud",
       "title": "Cloud & Architecture",
-      "items": ["AWS Cloud Foundations", "Serverless Concepts", "IoT Integration"]
+      "items": [
+        "AWS Cloud Foundations",
+        "Serverless Concepts",
+        "IoT Integration"
+      ]
     },
     {
       "icon": "database",
       "title": "Data & AI/ML",
-      "items": ["MySQL", "scikit-learn", "pandas", "NLTK", "Google Gemini API"]
+      "items": [
+        "MySQL",
+        "scikit-learn",
+        "pandas",
+        "NLTK",
+        "Google Gemini API"
+      ]
     },
     {
       "icon": "cpu",
       "title": "Hardware & Edge",
-      "items": ["ESP32", "Raspberry Pi 5", "GSM/GPS Modules", "Audio/Camera Modules"]
+      "items": [
+        "ESP32",
+        "Raspberry Pi 5",
+        "GSM/GPS Modules",
+        "Audio/Camera Modules"
+      ]
     },
     {
       "icon": "tool",
       "title": "Tools & Platforms",
-      "items": ["Git", "VS Code", "Android Studio", "Linux Environments", "Windows"]
+      "items": [
+        "Git",
+        "VS Code",
+        "Android Studio",
+        "Linux Environments",
+        "Windows"
+      ]
     },
     {
       "icon": "users",
       "title": "Soft Skills & Leadership",
-      "items": ["Team Leadership", "Public Speaking", "Collaborative Problem Solving"]
+      "items": [
+        "Team Leadership",
+        "Public Speaking",
+        "Collaborative Problem Solving"
+      ]
     }
   ],
   "certifications": [
@@ -66,7 +99,9 @@
     {
       "category": "Global Communication",
       "icon": "globe",
-      "items": ["IELTS Score: 7.5 — Professional English Proficiency"]
+      "items": [
+        "IELTS Score: 7.5 — Professional English Proficiency"
+      ]
     }
   ],
   "interests": [
