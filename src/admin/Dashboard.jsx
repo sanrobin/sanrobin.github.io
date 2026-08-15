@@ -52,36 +52,57 @@ export default function Dashboard({ token, onLogout, apiBase }) {
       onClick: () => setActiveTab('experience'),
       className: activeTab === 'experience' ? 'dock-item-active' : ''
     },
-    {
-      icon: <GlobeIcon />,
-      label: 'View Portfolio',
-      onClick: () => window.open('/', '_blank')
-    },
-    {
-      icon: <LogOutIcon />,
-      label: 'Sign Out',
-      onClick: onLogout
-    }
   ];
 
   return (
     <div className="adm-dashboard-container">
-      {/* Top Header Bar */}
+      {/* Unified Top Navigation Bar */}
       <header className="adm-topbar">
+        {/* Left: Brand */}
         <div className="adm-topbar-brand">
           <div className="adm-topbar-logo-icon">S</div>
-          <span className="adm-topbar-logo-text">sanrobin CMS</span>
-          <span className="adm-topbar-badge">{tabTitles[activeTab]}</span>
+          <div className="adm-topbar-brand-text">
+            <span className="adm-topbar-logo-text">sanrobin CMS</span>
+            <span className="adm-topbar-badge">{tabTitles[activeTab]}</span>
+          </div>
         </div>
 
+        {/* Center: Integrated Dock Navigation */}
+        <div className="adm-topbar-center">
+          <Dock
+            items={dockItems}
+            className="adm-dock-panel"
+            magnification={54}
+            distance={130}
+            baseItemSize={38}
+            panelHeight={48}
+          />
+        </div>
+
+        {/* Right: User Status & Actions */}
         <div className="adm-topbar-actions">
-          <div className="adm-topbar-user">
+          <div className="adm-topbar-user" title={`Logged in as ${username}`}>
             <div className="adm-topbar-dot" />
-            <span>{username}</span>
+            <span className="adm-topbar-username">{username}</span>
           </div>
-          <button id="adm-top-logout" className="adm-top-logout-btn" onClick={onLogout} title="Sign Out">
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="adm-top-btn adm-top-live-btn"
+            title="View Live Portfolio (opens in new tab)"
+          >
+            <GlobeIcon />
+            <span className="adm-top-btn-text">Live Site</span>
+          </a>
+          <button
+            id="adm-top-logout"
+            className="adm-top-btn adm-top-logout-btn"
+            onClick={onLogout}
+            title="Sign Out"
+          >
             <LogOutIcon />
-            <span className="adm-top-logout-text">Sign Out</span>
+            <span className="adm-top-btn-text">Sign Out</span>
           </button>
         </div>
       </header>
@@ -94,18 +115,6 @@ export default function Dashboard({ token, onLogout, apiBase }) {
           {activeTab === 'experience' && <ExperienceEditor token={token} apiBase={apiBase} />}
         </div>
       </main>
-
-      {/* Floating Bottom Dock Navigation */}
-      <div className="adm-dock-wrapper">
-        <Dock
-          items={dockItems}
-          className="adm-dock-panel"
-          magnification={65}
-          distance={160}
-          baseItemSize={46}
-          panelHeight={64}
-        />
-      </div>
     </div>
   );
 }
