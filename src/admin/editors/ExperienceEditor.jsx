@@ -27,8 +27,10 @@ function useContentEditor(token, apiBase, file) {
       });
       const d = await res.json();
       if (!res.ok) throw new Error(d.error);
+      if (d.sha) setSha(d.sha);
       setStatus('saved'); setStatusMsg('Saved & committed to GitHub ✓');
       setTimeout(() => setStatus('idle'), 3000);
+      return true;
     } catch (err) {
       setStatus('error'); setStatusMsg(err.message || 'Save failed');
       setTimeout(() => setStatus('idle'), 4000);

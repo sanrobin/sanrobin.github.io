@@ -1,4 +1,4 @@
-﻿// api/content.js — Vercel Serverless Function
+// api/content.js — Vercel Serverless Function
 // GET /api/content?file=bio|projects|experience  →  JSON file contents
 
 import jwt from 'jsonwebtoken';
@@ -39,6 +39,7 @@ export default async function handler(req, res) {
     headers: {
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       Accept: 'application/vnd.github.v3+json',
+      'User-Agent': 'sanrobin-cms/1.0',
     },
   });
 

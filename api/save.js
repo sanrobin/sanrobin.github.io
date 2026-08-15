@@ -1,5 +1,5 @@
-﻿// api/save.js — Vercel Serverless Function
-// POST /api/save  { file, content, sha }  →  { ok, commitUrl }
+// api/save.js — Vercel Serverless Function
+// POST /api/save  { file, content, sha }  →  { ok, sha, commitUrl }
 
 import jwt from 'jsonwebtoken';
 
@@ -20,6 +20,25 @@ function verifyToken(req) {
   return jwt.verify(token, process.env.JWT_SECRET);
 }
 
+async function getLatestSha(filePath) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${filePath}?ref=${BRANCH}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        Accept: 'application/vnd.github.v3+json',
+        'User-Agent': 'sanrobin-cms/1.0',
+      },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data.sha;
+    }
+  } catch (err) {
+    console.error('Error fetching latest SHA:', err);
+  }
+  return null;
+}
+
 export default async function handler(req, res) {
   cors(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -32,34 +51,68 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const { file, content, sha } = req.body || {};
-  if (!FILES[file] || !content || !sha) {
-    return res.status(400).json({ error: 'Missing file, content, or sha' });
+  const { file, content, sha: passedSha } = req.body || {};
+  if (!FILES[file] || !content) {
+    return res.status(400).json({ error: 'Missing file or content' });
+  }
+
+  const targetPath = FILES[file];
+  let fileSha = passedSha || (await getLatestSha(targetPath));
+
+  if (!fileSha) {
+    fileSha = await getLatestSha(targetPath);
   }
 
   const encoded = Buffer.from(JSON.stringify(content, null, 2) + '\n').toString('base64');
-  const apiUrl = `https://api.github.com/repos/${REPO}/contents/${FILES[file]}`;
+  const apiUrl = `https://api.github.com/repos/${REPO}/contents/${targetPath}`;
 
-  const ghRes = await fetch(apiUrl, {
+  const commitData = {
+    message: `cms(${file}): update via admin panel [${user.username}]`,
+    content: encoded,
+    sha: fileSha,
+    branch: BRANCH,
+  };
+
+  let ghRes = await fetch(apiUrl, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       Accept: 'application/vnd.github.v3+json',
       'Content-Type': 'application/json',
+      'User-Agent': 'sanrobin-cms/1.0',
     },
-    body: JSON.stringify({
-      message: `cms(${file}): update via admin panel [${user.username}]`,
-      content: encoded,
-      sha,
-      branch: BRANCH,
-    }),
+    body: JSON.stringify(commitData),
   });
 
+  // If conflict (409), attempt once with fresh SHA
+  if (ghRes.status === 409) {
+    const freshSha = await getLatestSha(targetPath);
+    if (freshSha && freshSha !== fileSha) {
+      commitData.sha = freshSha;
+      ghRes = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+          'User-Agent': 'sanrobin-cms/1.0',
+        },
+        body: JSON.stringify(commitData),
+      });
+    }
+  }
+
   if (!ghRes.ok) {
-    const err = await ghRes.json();
-    return res.status(ghRes.status).json({ error: err.message || 'GitHub API error' });
+    const err = await ghRes.json().catch(() => ({}));
+    let errMsg = err.message || 'GitHub API error';
+    if (ghRes.status === 403 && errMsg.includes('Resource not accessible')) {
+      errMsg = 'GitHub Personal Access Token lacks "Contents: Read and write" permission for this repository.';
+    }
+    return res.status(ghRes.status).json({ error: errMsg });
   }
 
   const data = await ghRes.json();
-  return res.status(200).json({ ok: true, commitUrl: data.commit?.html_url });
+  const newSha = data.content?.sha || fileSha;
+  return res.status(200).json({ ok: true, sha: newSha, commitUrl: data.commit?.html_url });
 }
+

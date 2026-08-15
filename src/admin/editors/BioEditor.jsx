@@ -27,7 +27,7 @@ function useContentEditor(token, apiBase, file) {
       });
       const d = await res.json();
       if (!res.ok) throw new Error(d.error);
-      setSha(''); // will refetch on next load; force reload for fresh sha
+      if (d.sha) setSha(d.sha);
       setStatus('saved');
       setStatusMsg('Saved & committed to GitHub ✓');
       setTimeout(() => setStatus('idle'), 3000);
