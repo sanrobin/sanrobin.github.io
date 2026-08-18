@@ -308,6 +308,7 @@ export default function App() {
                 status={bioData.status}
                 contactText="Contact Me"
                 avatarUrl="/itz_me.png"
+                miniAvatarUrl="/snap_profile.png"
                 showUserInfo={true}
                 enableTilt={true}
                 enableMobileTilt={false}
