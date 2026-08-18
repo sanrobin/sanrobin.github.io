@@ -314,7 +314,7 @@ export default function App() {
                 enableMobileTilt={false}
                 onContactClick={() => window.location.href = `mailto:${bioData.email}`}
                 behindGlowEnabled
-                behindGlowColor="rgba(220, 20, 60, 0.65)"
+                behindGlowColor="rgba(255, 255, 255, 0.12)"
               />
             </div>
           </div>
