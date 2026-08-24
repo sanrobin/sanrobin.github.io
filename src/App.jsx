@@ -7,6 +7,7 @@ import ProfileCard from './components/ProfileCard/ProfileCard';
 import StrokeText from './components/StrokeText/StrokeText';
 import ContactForm from './components/ContactForm/ContactForm';
 import SpecularButton from './components/SpecularButton/SpecularButton';
+import { AnimatedItem } from './components/AnimatedList/AnimatedList';
 import {
   FiSun,
   FiMoon,
@@ -171,6 +172,28 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const [reducedMotion, setReducedMotion] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('portfolio-reduced-motion') === 'true';
+    }
+    return false;
+  });
+
+  const toggleReducedMotion = useCallback(() => {
+    setReducedMotion(prev => {
+      const next = !prev;
+      localStorage.setItem('portfolio-reduced-motion', String(next));
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) {
+      document.documentElement.classList.add('reduced-motion');
+    } else {
+      document.documentElement.classList.remove('reduced-motion');
+    }
+  }, [reducedMotion]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -181,7 +204,7 @@ export default function App() {
   const handleNavClick = useCallback(() => setMenuOpen(false), []);
 
   return (
-    <ClickSpark sparkColor="#FF6B6B" sparkSize={12} sparkRadius={20} sparkCount={10} duration={500}>
+    <ClickSpark sparkColor="#FF6B6B" sparkSize={12} sparkRadius={20} sparkCount={10} duration={500} disabled={reducedMotion}>
       {/* Theme Toggle — Top Left with Frosted Look */}
       <div className="theme-toggle">
         <SpecularButton
@@ -219,21 +242,23 @@ export default function App() {
       </div>
 
       {/* Fixed LiquidEther Background */}
-      <div className="liquid-bg">
-        <LiquidEther
-          colors={['#DC143C', '#E8751A', '#FF6B6B']}
-          mouseForce={20}
-          cursorSize={100}
-          resolution={0.5}
-          isBounce
-          autoDemo={true}
-          autoSpeed={0.3}
-          autoIntensity={0.8}
-          takeoverDuration={0.25}
-          autoResumeDelay={3000}
-          autoRampDuration={0.6}
-        />
-      </div>
+      {!reducedMotion && (
+        <div className="liquid-bg">
+          <LiquidEther
+            colors={['#DC143C', '#E8751A', '#FF6B6B']}
+            mouseForce={20}
+            cursorSize={100}
+            resolution={0.5}
+            isBounce
+            autoDemo={true}
+            autoSpeed={0.3}
+            autoIntensity={0.8}
+            takeoverDuration={0.25}
+            autoResumeDelay={3000}
+            autoRampDuration={0.6}
+          />
+        </div>
+      )}
 
       {/* Navigation Dock (Themed & Comprehensive) */}
       <Dock 
@@ -297,7 +322,22 @@ export default function App() {
                 </h2>
               </div>
               {bioData.aboutParagraphs.map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
+                <p key={i}>
+                  {paragraph}
+                  {i === 0 && (
+                    <>
+                      {' '}
+                      <a
+                        href="#"
+                        className="low-end-toggle"
+                        onClick={(e) => { e.preventDefault(); toggleReducedMotion(); }}
+                        title={reducedMotion ? 'Re-enable animations' : 'Disable animations for better performance'}
+                      >
+                        {reducedMotion ? '✦ Animations are off — click to re-enable' : '⚡ Feeling laggy? Click here for a lighter experience.'}
+                      </a>
+                    </>
+                  )}
+                </p>
               ))}
             </div>
             <div className="about-profile">
@@ -310,54 +350,34 @@ export default function App() {
                 avatarUrl="/itz_me.png"
                 miniAvatarUrl="/snap_profile.png"
                 showUserInfo={true}
-                enableTilt={true}
+                enableTilt={!reducedMotion}
                 enableMobileTilt={false}
                 onContactClick={() => window.location.href = `mailto:${bioData.email}`}
-                behindGlowEnabled
+                behindGlowEnabled={!reducedMotion}
                 behindGlowColor="rgba(255, 255, 255, 0.12)"
               />
             </div>
           </div>
           <div className="about-highlights-horizontal">
-            <SpotlightCard spotlightColor="rgba(220, 20, 60, 0.15)">
-              <div className="highlight-item">
-                <div className="highlight-icon">
-                  <FiAward size={20} />
-                </div>
-                <div>
-                  <div className="highlight-label">Education</div>
-                  <div className="highlight-value">
-                    {bioData.education}
+            {[
+              { color: 'rgba(220, 20, 60, 0.15)', icon: <FiAward size={20} />, label: 'Education', value: bioData.education },
+              { color: 'rgba(232, 117, 26, 0.15)', icon: <FiTarget size={20} />, label: 'Current Focus', value: bioData.currentFocus },
+              { color: 'rgba(255, 107, 107, 0.15)', icon: <FiGlobe size={20} />, label: 'Languages', value: bioData.languages },
+            ].map((hl, i) => (
+              <AnimatedItem key={i} delay={reducedMotion ? 0 : Math.min(i * 0.08, 0.3)} index={i}>
+                <SpotlightCard spotlightColor={hl.color}>
+                  <div className="highlight-item">
+                    <div className="highlight-icon">
+                      {hl.icon}
+                    </div>
+                    <div>
+                      <div className="highlight-label">{hl.label}</div>
+                      <div className="highlight-value">{hl.value}</div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </SpotlightCard>
-            <SpotlightCard spotlightColor="rgba(232, 117, 26, 0.15)">
-              <div className="highlight-item">
-                <div className="highlight-icon">
-                  <FiTarget size={20} />
-                </div>
-                <div>
-                  <div className="highlight-label">Current Focus</div>
-                  <div className="highlight-value">
-                    {bioData.currentFocus}
-                  </div>
-                </div>
-              </div>
-            </SpotlightCard>
-            <SpotlightCard spotlightColor="rgba(255, 107, 107, 0.15)">
-              <div className="highlight-item">
-                <div className="highlight-icon">
-                  <FiGlobe size={20} />
-                </div>
-                <div>
-                  <div className="highlight-label">Languages</div>
-                  <div className="highlight-value">
-                    {bioData.languages}
-                  </div>
-                </div>
-              </div>
-            </SpotlightCard>
+                </SpotlightCard>
+              </AnimatedItem>
+            ))}
           </div>
         </div>
       </AnimatedSection>
@@ -372,22 +392,24 @@ export default function App() {
           </p>
         </div>
         <div className="skills-grid">
-          {skills.map((cat) => (
-            <SpotlightCard key={cat.title} spotlightColor="rgba(220, 20, 60, 0.15)">
-              <div className="skill-card-title">
-                <span className="skill-card-icon">
-                  <MonochromeIcon name={cat.icon} size={18} />
-                </span>
-                {cat.title}
-              </div>
-              <div className="skill-tags">
-                {cat.items.map((item) => (
-                  <span key={item} className="skill-tag">
-                    {item}
+          {skills.map((cat, i) => (
+            <AnimatedItem key={cat.title} delay={reducedMotion ? 0 : Math.min(i * 0.06, 0.3)} index={i}>
+              <SpotlightCard spotlightColor="rgba(220, 20, 60, 0.15)">
+                <div className="skill-card-title">
+                  <span className="skill-card-icon">
+                    <MonochromeIcon name={cat.icon} size={18} />
                   </span>
-                ))}
-              </div>
-            </SpotlightCard>
+                  {cat.title}
+                </div>
+                <div className="skill-tags">
+                  {cat.items.map((item) => (
+                    <span key={item} className="skill-tag">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </SpotlightCard>
+            </AnimatedItem>
           ))}
         </div>
       </AnimatedSection>
@@ -400,19 +422,21 @@ export default function App() {
         </div>
         <div className="timeline">
           {experienceList.map((exp, i) => (
-            <div key={i} className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-date">{exp.date}</div>
-              <div className="timeline-title">{exp.title}</div>
-              <div className="timeline-org">
-                {exp.org} · {exp.location}
+            <AnimatedItem key={i} delay={reducedMotion ? 0 : Math.min(i * 0.1, 0.4)} index={i}>
+              <div className="timeline-item">
+                <div className="timeline-dot"></div>
+                <div className="timeline-date">{exp.date}</div>
+                <div className="timeline-title">{exp.title}</div>
+                <div className="timeline-org">
+                  {exp.org} · {exp.location}
+                </div>
+                <ul className="timeline-desc">
+                  {exp.points.map((pt, j) => (
+                    <li key={j}>{pt}</li>
+                  ))}
+                </ul>
               </div>
-              <ul className="timeline-desc">
-                {exp.points.map((pt, j) => (
-                  <li key={j}>{pt}</li>
-                ))}
-              </ul>
-            </div>
+            </AnimatedItem>
           ))}
         </div>
       </AnimatedSection>
@@ -428,19 +452,21 @@ export default function App() {
         </div>
         <div className="projects-grid">
           {projectsList.map((proj, i) => (
-            <SpotlightCard key={i} spotlightColor="rgba(232, 117, 26, 0.12)">
-              <div className="project-date">{proj.date}</div>
-              <div className="project-title">{proj.title}</div>
-              <div className="project-concept">{proj.concept}</div>
-              <div className="project-desc">{proj.desc}</div>
-              <div className="project-tech">
-                {proj.tech.map((t) => (
-                  <span key={t} className="tech-tag">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </SpotlightCard>
+            <AnimatedItem key={i} delay={reducedMotion ? 0 : Math.min(i * 0.08, 0.35)} index={i}>
+              <SpotlightCard spotlightColor="rgba(232, 117, 26, 0.12)">
+                <div className="project-date">{proj.date}</div>
+                <div className="project-title">{proj.title}</div>
+                <div className="project-concept">{proj.concept}</div>
+                <div className="project-desc">{proj.desc}</div>
+                <div className="project-tech">
+                  {proj.tech.map((t) => (
+                    <span key={t} className="tech-tag">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </SpotlightCard>
+            </AnimatedItem>
           ))}
         </div>
       </AnimatedSection>
@@ -453,22 +479,24 @@ export default function App() {
         </div>
         <div className="certs-grid">
           {certifications.map((cert, i) => (
-            <SpotlightCard key={i} spotlightColor="rgba(255, 107, 107, 0.15)">
-              <div className="cert-category">
-                <span className="cert-category-icon">
-                  <MonochromeIcon name={cert.icon} size={16} />
-                </span>
-                {cert.category}
-              </div>
-              <ul className="cert-list">
-                {cert.items.map((item, j) => (
-                  <li key={j}>
-                    <FiCheckCircle size={14} className="cert-icon" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </SpotlightCard>
+            <AnimatedItem key={i} delay={reducedMotion ? 0 : Math.min(i * 0.08, 0.3)} index={i}>
+              <SpotlightCard spotlightColor="rgba(255, 107, 107, 0.15)">
+                <div className="cert-category">
+                  <span className="cert-category-icon">
+                    <MonochromeIcon name={cert.icon} size={16} />
+                  </span>
+                  {cert.category}
+                </div>
+                <ul className="cert-list">
+                  {cert.items.map((item, j) => (
+                    <li key={j}>
+                      <FiCheckCircle size={14} className="cert-icon" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </SpotlightCard>
+            </AnimatedItem>
           ))}
         </div>
       </AnimatedSection>
@@ -484,13 +512,15 @@ export default function App() {
         </div>
         <div className="interests-grid">
           {interests.map((item, i) => (
-            <SpotlightCard key={i} spotlightColor="rgba(220, 20, 60, 0.1)">
-              <div className="interest-icon-wrapper">
-                <MonochromeIcon name={item.icon} size={28} className="interest-icon" />
-              </div>
-              <div className="interest-title">{item.title}</div>
-              <div className="interest-desc">{item.desc}</div>
-            </SpotlightCard>
+            <AnimatedItem key={i} delay={reducedMotion ? 0 : Math.min(i * 0.08, 0.3)} index={i}>
+              <SpotlightCard spotlightColor="rgba(220, 20, 60, 0.1)">
+                <div className="interest-icon-wrapper">
+                  <MonochromeIcon name={item.icon} size={28} className="interest-icon" />
+                </div>
+                <div className="interest-title">{item.title}</div>
+                <div className="interest-desc">{item.desc}</div>
+              </SpotlightCard>
+            </AnimatedItem>
           ))}
         </div>
       </AnimatedSection>

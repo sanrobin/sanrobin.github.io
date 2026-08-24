@@ -196,3 +196,92 @@ a:hover {
   background-clip: text;
   animation: gradientShift 4s ease infinite;
 }
+
+/* ========================================
+   LOW-END / REDUCED MOTION SUPPORT
+   ======================================== */
+
+/* Low-end toggle link in about paragraph */
+.low-end-toggle {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-bottom: 1px dashed var(--color-text-muted);
+  transition: color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  margin-top: 0.35rem;
+}
+
+.low-end-toggle:hover {
+  color: var(--color-accent-secondary);
+  border-color: var(--color-accent-secondary);
+}
+
+/* Reduced motion: kill all animations, transitions, and GPU-intensive effects */
+.reduced-motion,
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0ms !important;
+}
+
+.reduced-motion .animate-on-scroll {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.reduced-motion .card-spotlight::after {
+  display: none !important;
+}
+
+.reduced-motion .gradient-text {
+  animation: none !important;
+  background-size: 100% 100% !important;
+}
+
+.reduced-motion .hero-badge .dot {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+.reduced-motion .scroll-indicator .mouse::after {
+  animation: none !important;
+}
+
+/* Remove backdrop-filter (very GPU-heavy) */
+.reduced-motion .card-spotlight,
+.reduced-motion .navbar.scrolled,
+.reduced-motion .item {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Remove heavy box-shadows */
+.reduced-motion .timeline-dot {
+  box-shadow: 0 0 0 2px var(--color-accent-primary) !important;
+}
+
+.reduced-motion .btn-primary {
+  box-shadow: none !important;
+}
+
+/* Respect OS-level prefers-reduced-motion too */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

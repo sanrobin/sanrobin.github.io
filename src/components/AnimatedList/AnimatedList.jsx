@@ -4,7 +4,34 @@ import './AnimatedList.css';
 
 const AnimatedItem = ({ children, delay = 0, index, onMouseEnter, onClick }) => {
   const ref = useRef(null);
+  const [isReducedMotion, setIsReducedMotion] = useState(() =>
+    typeof document !== 'undefined' && document.documentElement.classList.contains('reduced-motion')
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsReducedMotion(document.documentElement.classList.contains('reduced-motion'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
   const inView = useInView(ref, { amount: 0.05, triggerOnce: false });
+
+  if (isReducedMotion) {
+    return (
+      <div
+        ref={ref}
+        data-index={index}
+        onMouseEnter={onMouseEnter}
+        onClick={onClick}
+        style={{ marginBottom: '1rem' }}
+      >
+        {children}
+      </div>
+    );
+  }
+
   return (
     <motion.div
       ref={ref}
@@ -145,4 +172,5 @@ const AnimatedList = ({
   );
 };
 
+export { AnimatedItem };
 export default AnimatedList;

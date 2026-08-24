@@ -8,8 +8,13 @@ const ClickSpark = ({
   duration = 400,
   easing = 'ease-out',
   extraScale = 1.0,
+  disabled = false,
   children
 }) => {
+  if (disabled) {
+    return <>{children}</>;
+  }
+
   const canvasRef = useRef(null);
   const sparksRef = useRef([]);
   const startTimeRef = useRef(null);
