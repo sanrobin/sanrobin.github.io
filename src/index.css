@@ -201,7 +201,7 @@ a:hover {
    LOW-END / REDUCED MOTION SUPPORT
    ======================================== */
 
-/* Low-end toggle link in about paragraph */
+/* Low-end toggle link in hero section */
 .low-end-toggle {
   display: inline-block;
   font-size: 0.82rem;
@@ -210,12 +210,18 @@ a:hover {
   border-bottom: 1px dashed var(--color-text-muted);
   transition: color 0.2s ease, border-color 0.2s ease;
   cursor: pointer;
-  margin-top: 0.35rem;
 }
 
 .low-end-toggle:hover {
   color: var(--color-accent-secondary);
   border-color: var(--color-accent-secondary);
+}
+
+.hero-low-end {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
 }
 
 /* Reduced motion: kill all animations, transitions, and GPU-intensive effects */

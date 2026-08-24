@@ -296,6 +296,14 @@ export default function App() {
           <p className="hero-subtitle">
             {bioData.heroSubtitle}
           </p>
+          <a
+            href="#"
+            className="low-end-toggle hero-low-end"
+            onClick={(e) => { e.preventDefault(); toggleReducedMotion(); }}
+            title={reducedMotion ? 'Re-enable animations' : 'Disable animations for better performance'}
+          >
+            {reducedMotion ? '✦ Animations are off — click to re-enable' : '⚡ Feeling laggy? Click here for a lighter experience.'}
+          </a>
           <div className="hero-cta">
             <a href="#projects" className="btn btn-primary">
               View Projects ↓
@@ -322,22 +330,7 @@ export default function App() {
                 </h2>
               </div>
               {bioData.aboutParagraphs.map((paragraph, i) => (
-                <p key={i}>
-                  {paragraph}
-                  {i === 0 && (
-                    <>
-                      {' '}
-                      <a
-                        href="#"
-                        className="low-end-toggle"
-                        onClick={(e) => { e.preventDefault(); toggleReducedMotion(); }}
-                        title={reducedMotion ? 'Re-enable animations' : 'Disable animations for better performance'}
-                      >
-                        {reducedMotion ? '✦ Animations are off — click to re-enable' : '⚡ Feeling laggy? Click here for a lighter experience.'}
-                      </a>
-                    </>
-                  )}
-                </p>
+                <p key={i}>{paragraph}</p>
               ))}
             </div>
             <div className="about-profile">
