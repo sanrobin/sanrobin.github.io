@@ -218,10 +218,9 @@ a:hover {
 }
 
 .hero-low-end {
-  display: block;
-  text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 0.25rem;
+  display: inline-block;
+  margin-top: -0.5rem;
+  margin-bottom: 0;
 }
 
 /* Reduced motion: kill all animations, transitions, and GPU-intensive effects */
