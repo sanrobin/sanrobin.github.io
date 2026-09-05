@@ -73,7 +73,7 @@ const ClickSpark = ({
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    let animationId;
+    let animationId = null;
 
     const draw = timestamp => {
       if (!startTimeRef.current) {
@@ -108,15 +108,25 @@ const ClickSpark = ({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      // Only continue RAF if sparks remain
+      if (sparksRef.current.length > 0) {
+        animationId = requestAnimationFrame(draw);
+      } else {
+        animationId = null;
+      }
     };
 
-    animationId = requestAnimationFrame(draw);
+    // Store draw function so handleClick can start the loop
+    drawRef.current = draw;
+    animationIdRef.current = animationId;
 
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationId) cancelAnimationFrame(animationId);
     };
   }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
+
+  const drawRef = useRef(null);
+  const animationIdRef = useRef(null);
 
   const handleClick = e => {
     const canvas = canvasRef.current;
@@ -134,6 +144,11 @@ const ClickSpark = ({
     }));
 
     sparksRef.current.push(...newSparks);
+
+    // Start RAF loop if not already running
+    if (!animationIdRef.current && drawRef.current) {
+      animationIdRef.current = requestAnimationFrame(drawRef.current);
+    }
   };
 
   return (

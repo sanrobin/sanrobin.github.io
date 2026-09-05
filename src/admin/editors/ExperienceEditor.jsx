@@ -48,7 +48,8 @@ function Field({ label, id, value, onChange }) {
   );
 }
 
-function PointsField({ id, items, onChange }) {
+function PointsField({ id, items: rawItems, onChange }) {
+  const items = Array.isArray(rawItems) ? rawItems : [];
   function update(i, v) { const a = [...items]; a[i] = v; onChange(a); }
   function remove(i)    { onChange(items.filter((_, j) => j !== i)); }
 

@@ -1,0 +1,229 @@
+/* ========================================
+   THEME TOGGLE SWITCH COMPONENT
+   ======================================== */
+
+.theme-toggle-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle-switch:hover {
+  transform: scale(1.05);
+}
+
+.theme-toggle-switch:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle-switch:focus-visible {
+  outline: 2px solid var(--color-accent-primary, #DC143C);
+  outline-offset: 4px;
+  border-radius: 9999px;
+}
+
+/* ── Track ── */
+.theme-toggle-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 64px;
+  height: 32px;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+/* Dark Mode Track State */
+.is-dark .theme-toggle-track {
+  background: linear-gradient(135deg, rgba(16, 17, 28, 0.85) 0%, rgba(26, 22, 40, 0.85) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.is-dark.theme-toggle-switch:hover .theme-toggle-track {
+  border-color: rgba(220, 20, 60, 0.45);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(220, 20, 60, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12);
+}
+
+/* Light Mode Track State */
+.is-light .theme-toggle-track {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(254, 243, 230, 0.85) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.is-light.theme-toggle-switch:hover .theme-toggle-track {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 
+    0 6px 20px rgba(245, 158, 11, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+/* ── Ambient Track Icons ── */
+.track-icon {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.track-icon--sun {
+  left: 9px;
+  color: #f59e0b;
+}
+
+.track-icon--moon {
+  right: 9px;
+  color: #94a3b8;
+}
+
+/* Track icon visibility depending on mode */
+.is-dark .track-icon--sun {
+  opacity: 0.65;
+  transform: translateY(-50%) scale(1);
+}
+
+.is-dark .track-icon--moon {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.5);
+}
+
+.is-light .track-icon--sun {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.5);
+}
+
+.is-light .track-icon--moon {
+  opacity: 0.65;
+  color: #64748b;
+  transform: translateY(-50%) scale(1);
+}
+
+/* ── Sliding Thumb Knob ── */
+.theme-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: 
+    transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* Dark mode: thumb moves to the right (32px) */
+.is-dark .theme-toggle-thumb {
+  transform: translateX(32px);
+  background: linear-gradient(135deg, #26273e 0%, #151524 100%);
+  border: 1px solid rgba(220, 20, 60, 0.5);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(220, 20, 60, 0.3);
+}
+
+/* Light mode: thumb sits on the left (0px) */
+.is-light .theme-toggle-thumb {
+  transform: translateX(0);
+  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 
+    0 2px 8px rgba(245, 158, 11, 0.25),
+    0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ── SVG Icon Rendering & No-Clipping Rules ── */
+.theme-toggle-switch svg,
+.track-icon svg,
+.thumb-icon svg {
+  overflow: visible !important;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ── Thumb Icons & Cross-Fade ── */
+.thumb-icon-container {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.thumb-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  transition: 
+    transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
+    opacity 0.3s ease;
+}
+
+.thumb-icon--sun {
+  color: #ea580c;
+}
+
+.thumb-icon--moon {
+  color: #f1f5f9;
+}
+
+/* Active icon rotations */
+.is-dark .thumb-icon--sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.4);
+}
+
+.is-dark .thumb-icon--moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.is-light .thumb-icon--sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.is-light .thumb-icon--moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.4);
+}
+

@@ -121,14 +121,7 @@
 }
 
 @media (max-width: 768px) {
-  .dock-panel {
-    top: auto;
-    bottom: 1rem;
-    gap: 0.25rem;
-    padding: 0.35rem 0.45rem 0;
-  }
-  .dock-label {
-    bottom: auto;
-    top: -2.25rem;
+  .dock-outer {
+    display: none !important;
   }
 }

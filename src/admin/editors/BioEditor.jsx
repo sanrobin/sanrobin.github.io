@@ -63,7 +63,8 @@ function TextareaField({ label, id, value, onChange, rows = 3 }) {
   );
 }
 
-function ArrayField({ label, id, items, onChange, placeholder = 'Add item…' }) {
+function ArrayField({ label, id, items: rawItems, onChange, placeholder = 'Add item…' }) {
+  const items = Array.isArray(rawItems) ? rawItems : [];
   function update(i, val) { const a = [...items]; a[i] = val; onChange(a); }
   function remove(i)      { onChange(items.filter((_, idx) => idx !== i)); }
   function add()          { onChange([...items, '']); }

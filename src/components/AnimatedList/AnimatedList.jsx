@@ -16,7 +16,7 @@ const AnimatedItem = ({ children, delay = 0, index, onMouseEnter, onClick }) => 
     return () => observer.disconnect();
   }, []);
 
-  const inView = useInView(ref, { amount: 0.05, triggerOnce: false });
+  const inView = useInView(ref, { amount: 0.05, triggerOnce: true });
 
   if (isReducedMotion) {
     return (
@@ -25,7 +25,6 @@ const AnimatedItem = ({ children, delay = 0, index, onMouseEnter, onClick }) => 
         data-index={index}
         onMouseEnter={onMouseEnter}
         onClick={onClick}
-        style={{ marginBottom: '1rem' }}
       >
         {children}
       </div>
@@ -41,7 +40,6 @@ const AnimatedItem = ({ children, delay = 0, index, onMouseEnter, onClick }) => 
       initial={{ scale: 0.96, opacity: 0, y: 15 }}
       animate={inView ? { scale: 1, opacity: 1, y: 0 } : { scale: 0.96, opacity: 0, y: 15 }}
       transition={{ duration: 0.25, delay }}
-      style={{ marginBottom: '1rem' }}
     >
       {children}
     </motion.div>

@@ -6,35 +6,35 @@ import Dock from './components/Dock/Dock';
 import ProfileCard from './components/ProfileCard/ProfileCard';
 import StrokeText from './components/StrokeText/StrokeText';
 import ContactForm from './components/ContactForm/ContactForm';
-import SpecularButton from './components/SpecularButton/SpecularButton';
+import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import { AnimatedItem } from './components/AnimatedList/AnimatedList';
 import {
-  FiSun,
-  FiMoon,
-  FiHome,
-  FiUser,
-  FiCode,
-  FiBriefcase,
-  FiLayers,
-  FiCloud,
-  FiCpu,
-  FiTool,
-  FiUsers,
-  FiShield,
-  FiGlobe,
-  FiTerminal,
-  FiVideo,
-  FiHeadphones,
-  FiDatabase,
   FiAward,
-  FiTarget,
-  FiMail,
-  FiGithub,
-  FiLinkedin,
+  FiBriefcase,
   FiCheckCircle,
-  FiHeart,
+  FiCloud,
+  FiCode,
   FiCompass,
-  FiLock
+  FiCpu,
+  FiDatabase,
+  FiGithub,
+  FiGlobe,
+  FiHeadphones,
+  FiHeart,
+  FiHome,
+  FiLayers,
+  FiLinkedin,
+  FiLock,
+  FiMail,
+  FiMenu,
+  FiShield,
+  FiTarget,
+  FiTerminal,
+  FiTool,
+  FiUser,
+  FiUsers,
+  FiVideo,
+  FiX
 } from 'react-icons/fi';
 import './App.css';
 
@@ -131,6 +131,19 @@ const dockItems = [
   { icon: <FiMail size={18} />, label: 'Contact', onClick: () => document.getElementById('reachout')?.scrollIntoView({ behavior: 'smooth' }) },
 ];
 
+/* ── Mobile navigation items ──────────────────────── */
+
+const mobileNavItems = [
+  { icon: <FiHome size={18} />, label: 'Home', target: 'hero' },
+  { icon: <FiUser size={18} />, label: 'About', target: 'about' },
+  { icon: <FiCode size={18} />, label: 'Skills', target: 'skills' },
+  { icon: <FiBriefcase size={18} />, label: 'Experience', target: 'experience' },
+  { icon: <FiLayers size={18} />, label: 'Projects', target: 'projects' },
+  { icon: <FiAward size={18} />, label: 'Certifications', target: 'certifications' },
+  { icon: <FiCompass size={18} />, label: 'Interests', target: 'interests' },
+  { icon: <FiMail size={18} />, label: 'Contact', target: 'reachout' },
+];
+
 /* ── Scroll animation hook ──────────────────────── */
 
 function useScrollReveal() {
@@ -169,8 +182,7 @@ function AnimatedSection({ children, className = '', id }) {
 /* ── App ────────────────────────────────────────────── */
 
 export default function App() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const [reducedMotion, setReducedMotion] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -195,51 +207,68 @@ export default function App() {
     }
   }, [reducedMotion]);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+  const handleMobileNavClick = useCallback((target) => {
+    setMobileMenuOpen(false);
+    // Small delay to let the menu close animation start before scrolling
+    setTimeout(() => {
+      document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
   }, []);
 
-  const handleNavClick = useCallback(() => setMenuOpen(false), []);
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
 
   return (
     <ClickSpark sparkColor="#FF6B6B" sparkSize={12} sparkRadius={20} sparkCount={10} duration={500} disabled={reducedMotion}>
-      {/* Theme Toggle — Top Left with Frosted Look */}
+      {/* Theme Toggle — Top Left (not persisting while scrolling) */}
       <div className="theme-toggle">
-        <SpecularButton
-          size="sm"
-          radius={14}
-          tint={theme === 'dark' ? '#0d0d14' : '#ffffff'}
-          tintOpacity={theme === 'dark' ? 0.65 : 0.75}
-          blur={20}
-          textColor={theme === 'dark' ? '#f0eef6' : '#1A1A2E'}
-          lineColor={theme === 'dark' ? '#DC143C' : '#B91C3A'}
-          baseColor={theme === 'dark' ? '#444444' : '#bbbbbb'}
-          intensity={1.2}
-          shineSize={14}
-          shineFade={40}
-          thickness={1.2}
-          speed={0.35}
-          followMouse
-          proximity={200}
-          autoAnimate={false}
-          onClick={toggleTheme}
-          className="theme-toggle-btn"
-        >
-          <span className="theme-toggle-icon">
-            {theme === 'dark' ? (
-              <>
-                <FiSun size={14} /> <span>Switch to Light</span>
-              </>
-            ) : (
-              <>
-                <FiMoon size={14} /> <span>Switch to Dark</span>
-              </>
-            )}
-          </span>
-        </SpecularButton>
+        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
       </div>
+
+      {/* Mobile Hamburger Button — only visible on mobile */}
+      <button
+        className="mobile-menu-btn"
+        onClick={() => setMobileMenuOpen(prev => !prev)}
+        aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={mobileMenuOpen}
+      >
+        {mobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+      </button>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu-overlay" onClick={() => setMobileMenuOpen(false)}>
+          <nav className="mobile-menu-drawer" onClick={e => e.stopPropagation()}>
+            <div className="mobile-menu-header">
+              <span className="mobile-menu-title">Navigation</span>
+              <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
+                <FiX size={20} />
+              </button>
+            </div>
+            <ul className="mobile-menu-list">
+              {mobileNavItems.map((item, i) => (
+                <li key={item.target}>
+                  <button
+                    className="mobile-menu-link"
+                    onClick={() => handleMobileNavClick(item.target)}
+                    style={{ animationDelay: `${i * 0.04}s` }}
+                  >
+                    <span className="mobile-menu-link-icon">{item.icon}</span>
+                    <span>{item.label}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      )}
 
       {/* Fixed LiquidEther Background */}
       {!reducedMotion && (
